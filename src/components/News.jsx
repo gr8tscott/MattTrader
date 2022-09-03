@@ -7,7 +7,7 @@ const News = ({searchQuery}) => {
     let noNews=''
 
     const api_key = finnhub.ApiClient.instance.authentications['api_key']
-    
+    api_key.apiKey = 'cc8atrqad3iciiq4952g'
     const finnhubClient = new finnhub.DefaultApi()
     finnhubClient.companyNews(
         `${searchQuery}`,
@@ -18,9 +18,9 @@ const News = ({searchQuery}) => {
             console.error(error)
             noNews = "No news available"
           } else {
-            console.log(data.summary)
+            console.log(data.category)
             
-            setNews(data.CompanyNews.summary)
+            setNews(data)
           }
         }
       )

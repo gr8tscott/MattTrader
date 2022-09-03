@@ -1,7 +1,7 @@
 const finnhub = require('finnhub')
 
 const api_key = finnhub.ApiClient.instance.authentications['api_key']
-
+api_key.apiKey = 'cc8atrqad3iciiq4952g'
 const finnhubClient = new finnhub.DefaultApi()
 
 finnhubClient.companyNews(
