@@ -3,12 +3,12 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
-const SingleWatchlist = (watchlist) => {
+const SingleWatchlist = ({ watchlists }) => {
   const [stocks, setStocks] = useState([])
 
   const getStocks = async () => {
     const res = await axios.get(
-      `http://localhost:8000/watchlists/${watchlist.id}`
+      `http://localhost:8000/watchlists/${watchlists.id}`
     )
     setStocks(res.data)
     console.log(res.data)

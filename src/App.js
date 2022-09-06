@@ -111,7 +111,10 @@ function App() {
             path="/watchlists"
             element={<Watchlist watchlists={watchlists} />}
           />
-          <Route path="/watchlists/:id" element={<SingleWatchlist />} />
+          <Route
+            path="/watchlists/:id"
+            element={<SingleWatchlist watchlists={watchlists} />}
+          />
         </Routes>
       </main>
     </div>
