@@ -27,15 +27,17 @@ const News = ({ news, noNews }) => {
   //   }
 
   //   useEffect(() => getNews(), [])
-  console.log(news)
+  //   console.log(news)
   return (
     <div className="homePage">
       <h1>News</h1>
       <h2>{noNews}</h2>
-      {news.map((theNews) => {
+      {news.slice(0, 5).map((theNews) => {
         return (
           <div>
-            <h2>{theNews.summary}</h2>
+            <img src={theNews.image} />
+            <h3>{theNews.headline}</h3>
+            <p>{theNews.summary}</p>
           </div>
         )
       })}

@@ -3,26 +3,26 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
-const Watchlist = () => {
-  const [watchlists, setWatchlists] = useState([])
+const Watchlist = (watchlists) => {
+  //   const [watchlists, setWatchlists] = useState([])
 
-  const getWatchlists = async () => {
-    const res = await axios.get(`http://localhost:8000/watchlists`)
-    setWatchlists(res.data)
-    // console.log(res.data)
-  }
-  //   useEffect(getWatchlists, [])
-  getWatchlists()
+  //   const getWatchlists = async () => {
+  //     const res = await axios.get(`http://localhost:8000/watchlists`)
+  //     setWatchlists(res.data)
+  //     // console.log(res.data)
+  //   }
+  //   useEffect(() => getWatchlists, [])
+  console.log(watchlists)
 
   return (
     <div className="homePage">
-      <h1>Watchlists</h1>
-      {watchlists.map((watchlist) => (
+      <h1>Watchlists {watchlists.name}</h1>
+      {/* {watchlists.map((watchlist) => (
         <h2>
           {watchlist.name}
           <Link to={`/watchlists/${watchlist.id}`}>HERE</Link>
         </h2>
-      ))}
+      ))} */}
     </div>
   )
 }

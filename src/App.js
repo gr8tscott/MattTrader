@@ -14,6 +14,8 @@ const finnhub = require('finnhub')
 function App() {
   const [quotes, setQuotes] = useState([])
   const [news, setNews] = useState([])
+  const [watchlists, setWatchlists] = useState([])
+
   let noNews = ''
 
   // const [searchResults, setSearchResults] = useState([])
@@ -67,6 +69,20 @@ function App() {
     let input = event.target.value
     setSearchQuery(input)
   }
+  const changeCase = (event) => {
+    event.preventDefault()
+    setSearchQuery(event.target.value.toUpperCase())
+    console.log(searchQuery)
+  }
+
+  /////////WATCHLISTS/////////////
+
+  const getWatchlists = async () => {
+    const res = await axios.get(`http://localhost:8000/watchlists`)
+    setWatchlists(res.data)
+    console.log(res.data)
+  }
+  useEffect(() => getWatchlists, [])
 
   return (
     <div className="App">
@@ -87,10 +103,14 @@ function App() {
                 getSearchResults={getSearchResults}
                 news={news}
                 noNews={noNews}
+                changeCase={changeCase}
               />
             }
           />
-          <Route path="/watchlists" element={<Watchlist />} />
+          <Route
+            path="/watchlists"
+            element={<Watchlist watchlists={watchlists} />}
+          />
           <Route path="/watchlists/:id" element={<SingleWatchlist />} />
         </Routes>
       </main>

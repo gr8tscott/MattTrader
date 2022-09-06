@@ -11,13 +11,19 @@ const Research = ({
   quotes,
   searchQuery,
   news,
-  noNews
+  noNews,
+  changeCase
 }) => {
   //   console.log(news)
   return (
     <div className="homePage">
       <h1>Research</h1>
-      <Search onChange={handleChange} onSubmit={getSearchResults} />
+      <Search
+        onChange={handleChange}
+        onSubmit={getSearchResults}
+        changeCase={changeCase}
+      />
+      <h3>{searchQuery}</h3>
       <QuoteBar quotes={quotes} />
       <News searchQuery={searchQuery} news={news} noNews={noNews} />
     </div>
