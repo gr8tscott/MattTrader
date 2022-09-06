@@ -10,7 +10,8 @@ const Watchlist = () => {
     setWatchlists(res.data)
     console.log(res.data)
   }
-  useEffect(getWatchlists, [])
+  //   useEffect(getWatchlists, [])
+  getWatchlists()
 
   return (
     <div className="homePage">
