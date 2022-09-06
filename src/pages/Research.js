@@ -13,6 +13,7 @@ const Research = ({
   news,
   noNews
 }) => {
+  //   console.log(news)
   return (
     <div className="homePage">
       <h1>Research</h1>

@@ -7,12 +7,13 @@ import Nav from './components/Nav'
 import Home from './components/Home'
 import Research from './pages/Research'
 import Watchlist from './pages/Watchlist'
+import SingleWatchlist from './components/SingleWatchlist'
 const finnhub = require('finnhub')
 // import finnhub from 'finnhub'
 
 function App() {
   const [quotes, setQuotes] = useState([])
-  const [news, setNews] = useState()
+  const [news, setNews] = useState([])
   let noNews = ''
 
   // const [searchResults, setSearchResults] = useState([])
@@ -55,7 +56,7 @@ function App() {
           console.error(error)
           noNews = 'No news available'
         } else {
-          console.log(data)
+          // console.log(data)
           setNews(data)
         }
       }
@@ -89,7 +90,8 @@ function App() {
               />
             }
           />
-          <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/watchlists" element={<Watchlist />} />
+          <Route path="/watchlists/:id" element={<SingleWatchlist />} />
         </Routes>
       </main>
     </div>
