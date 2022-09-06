@@ -6,19 +6,21 @@ import axios from 'axios'
 import Nav from './components/Nav'
 import Home from './components/Home'
 import Research from './pages/Research'
+import Watchlist from './pages/Watchlist'
 const finnhub = require('finnhub')
 // import finnhub from 'finnhub'
 
 function App() {
   const [quotes, setQuotes] = useState([])
   const [news, setNews] = useState()
+  let noNews = ''
 
-  const [searchResults, setSearchResults] = useState([])
-  const [searched, toggleSearched] = useState(false)
+  // const [searchResults, setSearchResults] = useState([])
+  // const [searched, toggleSearched] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
-  api_key.apiKey = 'cc8atrqad3iciiq4952g'
+  api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
 
   // finnhubClient.quote(`${searchQuery}`, (error, data, response) => {
@@ -27,9 +29,6 @@ function App() {
 
   const getSearchResults = async (e) => {
     e.preventDefault()
-    // let waffles = await axios.get(
-    //   `https://api.rawg.io/api/games?search=${searchQuery}&key=${process.env.REACT_APP_RAWG_KEY}`
-    // )
     let stockQuote = finnhubClient.quote(
       `${searchQuery}`,
       (error, data, response) => {
@@ -38,12 +37,29 @@ function App() {
         setQuotes(something)
       }
     )
-    let dataStuff = stockQuote
+    // let dataStuff = stockQuote
     console.log(quotes)
-    setSearchResults(dataStuff)
-    let searchGame = true
-    toggleSearched(searchGame)
+    // setSearchResults(dataStuff)
+    // let searchGame = true
+    // toggleSearched(searchGame)
     // setSearchQuery('')
+
+    //////////NEWS//////////////
+
+    let companyNews = finnhubClient.companyNews(
+      `${searchQuery}`,
+      '2020-01-01',
+      '2022-09-01',
+      (error, data, response) => {
+        if (error) {
+          console.error(error)
+          noNews = 'No news available'
+        } else {
+          console.log(data)
+          setNews(data)
+        }
+      }
+    )
   }
 
   const handleChange = (event) => {
@@ -68,9 +84,12 @@ function App() {
                 setQuotes={setQuotes}
                 handleChange={handleChange}
                 getSearchResults={getSearchResults}
+                news={news}
+                noNews={noNews}
               />
             }
           />
+          <Route path="/watchlist" element={<Watchlist />} />
         </Routes>
       </main>
     </div>
