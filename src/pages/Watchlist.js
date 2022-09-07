@@ -17,10 +17,10 @@ const Watchlist = ({ watchlists }) => {
   return (
     <div className="homePage">
       <h1>Watchlists</h1>
-      {watchlists.map((watchlist) => (
+      {watchlists.map((watchlist, index) => (
         <h2>
           {watchlist.name}
-          <Link to={`/watchlists/${watchlist.id}`}>HERE</Link>
+          <Link to={`/watchlists/${watchlist.id}/${index}`}>HERE</Link>
         </h2>
       ))}
     </div>

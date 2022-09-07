@@ -15,6 +15,7 @@ function App() {
   const [quotes, setQuotes] = useState([])
   const [news, setNews] = useState([])
   const [watchlists, setWatchlists] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   let noNews = ''
 
@@ -78,7 +79,7 @@ function App() {
   /////////WATCHLISTS/////////////
 
   const getWatchlists = async () => {
-    const res = await axios.get(`http://localhost:8000/watchlists`)
+    const res = await axios.get(`http://localhost:8000/watchlists/`)
     setWatchlists(res.data)
     console.log(res.data)
   }
@@ -112,8 +113,14 @@ function App() {
             element={<Watchlist watchlists={watchlists} />}
           />
           <Route
-            path="/watchlists/:id"
-            element={<SingleWatchlist watchlists={watchlists} />}
+            path="/watchlists/:id/:index"
+            element={
+              <SingleWatchlist
+                watchlists={watchlists}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+              />
+            }
           />
         </Routes>
       </main>
