@@ -83,6 +83,11 @@ function App() {
     setWatchlists(res.data)
     console.log(res.data)
   }
+  const deleteWatchlist = async (id) => {
+    let res = await axios.delete(`http://localhost:8000/watchlists/${id}`)
+    // getReview()
+  }
+
   useEffect(() => getWatchlists, [])
 
   return (
@@ -110,7 +115,12 @@ function App() {
           />
           <Route
             path="/watchlists"
-            element={<Watchlist watchlists={watchlists} />}
+            element={
+              <Watchlist
+                watchlists={watchlists}
+                deleteWatchlist={deleteWatchlist}
+              />
+            }
           />
           <Route
             path="/watchlists/:id/:index"
