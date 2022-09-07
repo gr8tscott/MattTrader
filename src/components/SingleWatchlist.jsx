@@ -17,6 +17,7 @@ const SingleWatchlist = ({ watchlists }) => {
     setStocks(stonks)
     // console.log(stocks)
   }
+
   useEffect(() => getStocks(), [])
   //   getStocks()
 
@@ -27,13 +28,27 @@ const SingleWatchlist = ({ watchlists }) => {
   let quoteArr = []
   //
   for (let i = 0; i < stocks.length; i++) {
+    // if (i < stocks.length === false) {
+    //   setQuotes(quoteArr)
+    //   console.log(quotes)
+    //   break
+    // }
+    console.log(stocks[i].ticker)
     finnhubClient.quote(`${stocks[i].ticker}`, (error, data, response) => {
       console.log(data)
       let something = data
-      quoteArr.push(something)
-      //   setQuotes(quoteArr)
+      quotes.push(something)
+      console.log(stocks)
+      console.log(quotes)
+      //   getQuotes()
     })
   }
+  //   const getQuotes = (e) => {
+  //     setQuotes(quoteArr)
+  //     console.log(quotes)
+  //   }
+  //   useEffect(() => getQuotes(), [])
+
   //   stocks.forEach((stock, i, stocks) => {
   //     // e.preventDefault()
   //     // stocks.forEach()
@@ -58,6 +73,9 @@ const SingleWatchlist = ({ watchlists }) => {
       <h1>{watchlists[index].name}</h1>
       {stocks.map((stock) => (
         <h4>{stock.ticker}</h4>
+      ))}
+      {quotes.map((quote) => (
+        <h2>{quote.c}</h2>
       ))}
     </div>
   )
