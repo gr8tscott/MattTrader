@@ -16,6 +16,7 @@ function App() {
   const [news, setNews] = useState([])
   const [watchlists, setWatchlists] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [users, setUsers] = useState([])
 
   let noNews = ''
 
@@ -88,7 +89,14 @@ function App() {
     // getReview()
   }
 
-  useEffect(() => getWatchlists, [])
+  //////////USERS/////////////////
+  const getUsers = async () => {
+    const res = await axios.get(`http://localhost:8000/user/`)
+    setUsers(res.data)
+    console.log(res.data)
+  }
+
+  useEffect(() => getWatchlists, getUsers, [])
 
   return (
     <div className="App">
@@ -119,6 +127,8 @@ function App() {
               <Watchlist
                 watchlists={watchlists}
                 deleteWatchlist={deleteWatchlist}
+                getUsers={getUsers}
+                users={users}
               />
             }
           />

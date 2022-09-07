@@ -1,4 +1,7 @@
-const CreateWatchlist = () => {
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+
+const CreateWatchlist = ({ getUsers, users }) => {
   const initialState = {
     name: '',
     stocks: []
@@ -13,14 +16,14 @@ const CreateWatchlist = () => {
     event.preventDefault()
     console.log(formState)
 
-    let res = await axios.post('http://localhost:8000/watchlists', formState)
+    let res = await axios.post('http://localhost:8000/watchlists/', formState)
     setFormState(initialState)
   }
   return (
     <div className="create-watchlist">
       <form className="form" onSubmit={handleSubmit}>
         <div className="watchlistInputs">
-          {/* <label htmlFor="watchlist">Watchlist Name:</label>
+          {/* <label htmlFor="watchlist">User Name:</label>
           <select id="manga" onChange={handleChange} value={formState.manga}>
             <option value="blank">---------</option>
 

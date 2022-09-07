@@ -2,8 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import CreateWatchlist from '../components/CreateWatchlist'
 
-const Watchlist = ({ watchlists, deleteWatchlist }) => {
+const Watchlist = ({ watchlists, deleteWatchlist, getUsers, users }) => {
   //   const [watchlists, setWatchlists] = useState([])
 
   //   const getWatchlists = async () => {
@@ -22,6 +23,7 @@ const Watchlist = ({ watchlists, deleteWatchlist }) => {
   return (
     <div className="homePage">
       <h1>Watchlists</h1>
+      <CreateWatchlist getUsers={getUsers} users={users} />
       {watchlists.map((watchlist, index) => (
         <div>
           <h2>
