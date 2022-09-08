@@ -4,12 +4,21 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 const finnhub = require('finnhub')
 
-const SingleWatchlist = ({ watchlists, stocks }) => {
-  //   const [stocks, setStocks] = useState([])
+const SingleWatchlist = ({ watchlists }) => {
+  const [stocks, setStocks] = useState([])
   const [quotes, setQuotes] = useState([])
 
   let { id, index } = useParams()
   //   setStocks(watchlists[index].stocks)
+
+  console.log(watchlists[index].id)
+  const getStocks = async () => {
+    const res = await axios.get(
+      `http://localhost:3001/api/stock/${watchlists[index].id}`
+    )
+    setStocks(res.data)
+    console.log(res.data)
+  }
 
   //   const getStocks = (e) => {
   //     // e.preventDefault()
@@ -18,7 +27,9 @@ const SingleWatchlist = ({ watchlists, stocks }) => {
   //     // console.log(stocks)
   //   }
 
-  //   useEffect(() => getStocks(), [])
+  useEffect(() => {
+    getStocks()
+  }, [])
   //   getStocks()
   //////////////////////////
   //   const api_key = finnhub.ApiClient.instance.authentications['api_key']
@@ -69,8 +80,29 @@ const SingleWatchlist = ({ watchlists, stocks }) => {
   //   })
 
   console.log(stocks)
+  //////////////////////////////
+  const initialState = {
+    watchlistId: watchlists[index].id,
+    ticker: ''
+  }
+  const [formState, setFormState] = useState(initialState)
+
+  const handleChange = (event) => {
+    setFormState({ ...formState, [event.target.id]: event.target.value })
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    console.log(formState)
+
+    let res = await axios.post(
+      'http://localhost:3001/api/stock/addstock',
+      formState
+    )
+    setFormState(initialState)
+  }
   return (
-    <div className="homePage">
+    <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
       {stocks.map((stock) => (
         <h4>{stock.ticker}</h4>
@@ -78,6 +110,21 @@ const SingleWatchlist = ({ watchlists, stocks }) => {
       {/* {quotes.map((quote) => (
         <h2>{quote.c}</h2>
       ))} */}
+      <div className="create-watchlist">
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="stockInput">
+            <label htmlFor="name">Add a stock to watchlist:</label>
+            <input
+              type="text"
+              id="ticker"
+              onChange={handleChange}
+              value={formState.ticker}
+            />
+          </div>
+
+          <button type="submit">Add!</button>
+        </form>
+      </div>
     </div>
   )
 }
