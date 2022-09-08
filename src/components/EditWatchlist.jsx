@@ -1,11 +1,10 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const CreateWatchlist = ({ getUsers, users }) => {
+const EditWatchlist = ({ getUsers, users, watchlists }) => {
   const initialState = {
-    user: '',
-    name: '',
-    stocks: []
+    ticker: '',
+    watchlist: watchlists[index]
   }
   const [formState, setFormState] = useState(initialState)
 
@@ -17,7 +16,7 @@ const CreateWatchlist = ({ getUsers, users }) => {
     event.preventDefault()
     console.log(formState)
 
-    let res = await axios.post('http://localhost:8000/watchlists/', formState)
+    let res = await axios.put('http://localhost:8000/watchlists/', formState)
     setFormState(initialState)
   }
   return (
@@ -67,4 +66,4 @@ const CreateWatchlist = ({ getUsers, users }) => {
   )
 }
 
-export default CreateWatchlist
+export default EditWatchlist

@@ -14,6 +14,7 @@ const Watchlist = ({ watchlists, deleteWatchlist, getUsers, users }) => {
   //   }
   //   useEffect(() => getWatchlists, [])
   console.log(watchlists)
+  console.log(users)
 
   //   const deleteWatchlist = async (id) => {
   //     let res = await axios.delete(`http://localhost:8000/watchlists/${id}`)

@@ -17,6 +17,7 @@ function App() {
   const [watchlists, setWatchlists] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [users, setUsers] = useState([])
+  const [stocks, setStocks] = useState([])
 
   let noNews = ''
 
@@ -80,23 +81,37 @@ function App() {
   /////////WATCHLISTS/////////////
 
   const getWatchlists = async () => {
-    const res = await axios.get(`http://localhost:8000/watchlists/`)
+    const res = await axios.get(`http://localhost:3001/api/watchlist/watchlist`)
     setWatchlists(res.data)
     console.log(res.data)
   }
   const deleteWatchlist = async (id) => {
-    let res = await axios.delete(`http://localhost:8000/watchlists/${id}`)
+    let res = await axios.delete(`http://localhost:3001/api/watchlist/${id}`)
     // getReview()
   }
 
+  /////////STOCKS/////////////
+  const getStocks = async () => {
+    const res = await axios.get(`http://localhost:3001/api/stock/stock`)
+    setStocks(res.data)
+    console.log(res.data)
+  }
+  const deleteStock = async (id) => {
+    let res = await axios.delete(`http://localhost:3001/api/stock/${id}`)
+    // getReview()
+  }
   //////////USERS/////////////////
   const getUsers = async () => {
-    const res = await axios.get(`http://localhost:8000/user/`)
+    const res = await axios.get(`http://localhost:3001/api/watchlist/`)
     setUsers(res.data)
     console.log(res.data)
   }
 
-  useEffect(() => getWatchlists, getUsers, [])
+  useEffect(() => {
+    getWatchlists()
+    getStocks()
+    getUsers()
+  }, [])
 
   return (
     <div className="App">
@@ -139,6 +154,7 @@ function App() {
                 watchlists={watchlists}
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
+                stocks={stocks}
               />
             }
           />
