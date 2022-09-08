@@ -72,10 +72,10 @@ const SingleWatchlist = ({ watchlists, stocks }) => {
   return (
     <div className="homePage">
       <h1>{watchlists[index].name}</h1>
-      {/* {stocks.map((stock) => (
+      {stocks.map((stock) => (
         <h4>{stock.ticker}</h4>
       ))}
-      {quotes.map((quote) => (
+      {/* {quotes.map((quote) => (
         <h2>{quote.c}</h2>
       ))} */}
     </div>

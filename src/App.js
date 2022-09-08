@@ -102,7 +102,7 @@ function App() {
   }
   //////////USERS/////////////////
   const getUsers = async () => {
-    const res = await axios.get(`http://localhost:3001/api/watchlist/`)
+    const res = await axios.get(`http://localhost:3001/api/user/user`)
     setUsers(res.data)
     console.log(res.data)
   }

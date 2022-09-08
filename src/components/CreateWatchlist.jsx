@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react'
 
 const CreateWatchlist = ({ getUsers, users }) => {
   const initialState = {
-    user: '',
-    name: '',
-    stocks: []
+    userId: '',
+    name: ''
   }
   const [formState, setFormState] = useState(initialState)
 
@@ -17,7 +16,10 @@ const CreateWatchlist = ({ getUsers, users }) => {
     event.preventDefault()
     console.log(formState)
 
-    let res = await axios.post('http://localhost:8000/watchlists/', formState)
+    let res = await axios.post(
+      'http://localhost:3001/api/watchlist/addwatchlist',
+      formState
+    )
     setFormState(initialState)
   }
   return (
@@ -25,12 +27,12 @@ const CreateWatchlist = ({ getUsers, users }) => {
       <form className="form" onSubmit={handleSubmit}>
         <div className="watchlistInputs">
           <label htmlFor="watchlist">User Name:</label>
-          <select id="user" onChange={handleChange} value={formState.user}>
+          <select id="userId" onChange={handleChange} value={formState.userId}>
             <option value="blank">---------</option>
 
             {users.map((user, index) => (
-              <option value={user.name} key={index}>
-                {user.name}
+              <option value={user.id} key={index}>
+                {user.username}
               </option>
             ))}
           </select>
@@ -43,13 +45,13 @@ const CreateWatchlist = ({ getUsers, users }) => {
             value={formState.name}
           />
 
-          <label htmlFor="stock">Insert Ticker Symbol:</label>
+          {/* <label htmlFor="stock">Insert Ticker Symbol:</label>
           <input
             type="text"
             id="ticker"
             onChange={handleChange}
             value={formState.stocks}
-          />
+          /> */}
         </div>
         {/* <div className="reviewText">
           <label htmlFor="text">Leave your review here:</label>
