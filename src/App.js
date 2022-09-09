@@ -8,6 +8,7 @@ import Home from './components/Home'
 import Research from './pages/Research'
 import Watchlist from './pages/Watchlist'
 import SingleWatchlist from './components/SingleWatchlist'
+// import Client from './api'
 const finnhub = require('finnhub')
 // import finnhub from 'finnhub'
 
@@ -89,6 +90,12 @@ function App() {
     let res = await axios.delete(`http://localhost:3001/api/watchlist/${id}`)
     getWatchlists()
   }
+  const updateWatchlist = async (id) => {
+    let res = await axios.put(
+      `http://localhost:3001/api/watchlist/${watchlists.id}`
+    )
+    getWatchlists()
+  }
 
   /////////STOCKS/////////////
   const getStocks = async () => {
@@ -145,6 +152,7 @@ function App() {
                 getUsers={getUsers}
                 users={users}
                 getWatchlists={getWatchlists}
+                updateWatchlist={updateWatchlist}
               />
             }
           />

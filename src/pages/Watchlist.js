@@ -10,23 +10,33 @@ const Watchlist = ({
   deleteWatchlist,
   getUsers,
   users,
-  getWatchlists
+  getWatchlists,
+  updateWatchlists
 }) => {
-  //   const [watchlists, setWatchlists] = useState([])
+  //   console.log(watchlists)
+  //   console.log(users)
+  const initialState = {
+    name: watchlists.name
+  }
 
-  //   const getWatchlists = async () => {
-  //     const res = await axios.get(`http://localhost:8000/watchlists`)
-  //     setWatchlists(res.data)
-  //     // console.log(res.data)
-  //   }
-  //   useEffect(() => getWatchlists, [])
-  console.log(watchlists)
-  console.log(users)
+  let { id, index } = useParams()
 
-  //   const deleteWatchlist = async (id) => {
-  //     let res = await axios.delete(`http://localhost:8000/watchlists/${id}`)
-  //     // getReview()
-  //   }
+  const [formState, setFormState] = useState(initialState)
+
+  const handleChange = (event) => {
+    setFormState({ ...formState, [event.target.id]: event.target.value })
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    console.log(formState)
+
+    let res = await axios.put(
+      `http://localhost:3001/api/watchlist/${watchlists.id}`,
+      formState
+    )
+    setFormState(initialState)
+  }
 
   return (
     <div className="watchlist">
@@ -48,7 +58,21 @@ const Watchlist = ({
           >
             Delete List
           </button>
-          <EditWatchlist watchlists={watchlists} />
+          <div className="edit-watchlist">
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="watchlistInputs">
+                <label htmlFor="name">Update Watchlist Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  onChange={handleChange}
+                  value={formState.name}
+                />
+              </div>
+
+              <button type="submit">Update Watchlist Name!</button>
+            </form>
+          </div>
         </div>
       ))}
     </div>

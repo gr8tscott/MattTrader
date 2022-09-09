@@ -38,7 +38,7 @@ const EditWatchlist = ({ getUsers, users, watchlists }) => {
           />
         </div>
 
-        <button type="submit">Create Watchlist!</button>
+        <button type="submit">Update Watchlist Name!</button>
       </form>
     </div>
   )
