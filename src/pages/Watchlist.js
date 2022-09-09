@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import CreateWatchlist from '../components/CreateWatchlist'
 
-const Watchlist = ({ watchlists, deleteWatchlist, getUsers, users }) => {
+const Watchlist = ({
+  watchlists,
+  deleteWatchlist,
+  getUsers,
+  users,
+  getWatchlists
+}) => {
   //   const [watchlists, setWatchlists] = useState([])
 
   //   const getWatchlists = async () => {
@@ -22,9 +28,13 @@ const Watchlist = ({ watchlists, deleteWatchlist, getUsers, users }) => {
   //   }
 
   return (
-    <div className="homePage">
+    <div className="watchlist">
       <h1>Watchlists</h1>
-      <CreateWatchlist getUsers={getUsers} users={users} />
+      <CreateWatchlist
+        getUsers={getUsers}
+        users={users}
+        getWatchlists={getWatchlists}
+      />
       {watchlists.map((watchlist, index) => (
         <div>
           <h2>

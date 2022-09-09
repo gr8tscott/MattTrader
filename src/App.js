@@ -144,6 +144,7 @@ function App() {
                 deleteWatchlist={deleteWatchlist}
                 getUsers={getUsers}
                 users={users}
+                getWatchlists={getWatchlists}
               />
             }
           />
@@ -155,6 +156,8 @@ function App() {
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
                 stocks={stocks}
+                deleteStock={deleteStock}
+                getStocks={getStocks}
               />
             }
           />

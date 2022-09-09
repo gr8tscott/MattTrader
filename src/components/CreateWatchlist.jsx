@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-const CreateWatchlist = ({ getUsers, users }) => {
+const CreateWatchlist = ({ getUsers, users, getWatchlists }) => {
   const initialState = {
     userId: '',
     name: ''
@@ -21,6 +21,7 @@ const CreateWatchlist = ({ getUsers, users }) => {
       formState
     )
     setFormState(initialState)
+    getWatchlists()
   }
   return (
     <div className="create-watchlist">

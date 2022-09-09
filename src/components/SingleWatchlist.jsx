@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 const finnhub = require('finnhub')
 
-const SingleWatchlist = ({ watchlists }) => {
+const SingleWatchlist = ({ watchlists, deleteStock }) => {
   const [stocks, setStocks] = useState([])
   const [quotes, setQuotes] = useState([])
 
@@ -32,28 +32,28 @@ const SingleWatchlist = ({ watchlists }) => {
   }, [])
   //   getStocks()
   //////////////////////////
-  //   const api_key = finnhub.ApiClient.instance.authentications['api_key']
-  //   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
-  //   const finnhubClient = new finnhub.DefaultApi()
+  const api_key = finnhub.ApiClient.instance.authentications['api_key']
+  api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
+  const finnhubClient = new finnhub.DefaultApi()
 
-  //   let quoteArr = []
-  //   //
-  //   for (let i = 0; i < stocks.length; i++) {
-  //     // if (i < stocks.length === false) {
-  //     //   setQuotes(quoteArr)
-  //     //   console.log(quotes)
-  //     //   break
-  //     // }
-  //     console.log(stocks[i].ticker)
-  //     finnhubClient.quote(`${stocks[i].ticker}`, (error, data, response) => {
-  //       console.log(data)
-  //       let something = data
-  //       quotes.push(something)
-  //       console.log(stocks)
-  //       console.log(quotes)
-  //       //   getQuotes()
-  //     })
-  //   }
+  let quoteArr = []
+  //
+  for (let i = 0; i < stocks.length; i++) {
+    // if (i < stocks.length === false) {
+    //   setQuotes(quoteArr)
+    //   console.log(quotes)
+    //   break
+    // }
+    console.log(stocks[i].ticker)
+    finnhubClient.quote(`${stocks[i].ticker}`, (error, data, response) => {
+      console.log(data)
+      let something = data
+      quotes.push(something)
+      console.log(stocks)
+      console.log(quotes)
+      //   getQuotes()
+    })
+  }
   ///////////////////////////
   //   const getQuotes = (e) => {
   //     setQuotes(quoteArr)
@@ -100,17 +100,27 @@ const SingleWatchlist = ({ watchlists }) => {
       formState
     )
     setFormState(initialState)
+    getStocks()
   }
   return (
     <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
       {stocks.map((stock) => (
-        <h4>{stock.ticker}</h4>
+        <div>
+          <h4>{stock.ticker}</h4>
+          <button
+            className="stockdeletebutton"
+            onClick={() => deleteStock(stock.id)}
+          >
+            Remove
+          </button>
+        </div>
       ))}
+
       {/* {quotes.map((quote) => (
         <h2>{quote.c}</h2>
       ))} */}
-      <div className="create-watchlist">
+      <div className="create-stock">
         <form className="form" onSubmit={handleSubmit}>
           <div className="stockInput">
             <label htmlFor="name">Add a stock to watchlist:</label>
