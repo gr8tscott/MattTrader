@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import CreateWatchlist from '../components/CreateWatchlist'
+import EditWatchlist from '../components/EditWatchlist'
 
 const Watchlist = ({
   watchlists,
@@ -47,6 +48,7 @@ const Watchlist = ({
           >
             Delete List
           </button>
+          <EditWatchlist watchlists={watchlists} />
         </div>
       ))}
     </div>

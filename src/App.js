@@ -87,7 +87,7 @@ function App() {
   }
   const deleteWatchlist = async (id) => {
     let res = await axios.delete(`http://localhost:3001/api/watchlist/${id}`)
-    // getReview()
+    getWatchlists()
   }
 
   /////////STOCKS/////////////
@@ -98,7 +98,7 @@ function App() {
   }
   const deleteStock = async (id) => {
     let res = await axios.delete(`http://localhost:3001/api/stock/${id}`)
-    // getReview()
+    getStocks()
   }
   //////////USERS/////////////////
   const getUsers = async () => {

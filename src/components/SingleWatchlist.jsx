@@ -2,23 +2,24 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import EditWatchlist from './EditWatchlist'
 const finnhub = require('finnhub')
 
-const SingleWatchlist = ({ watchlists, deleteStock }) => {
-  const [stocks, setStocks] = useState([])
+const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
+  //   const [stocks, setStocks] = useState([])
   const [quotes, setQuotes] = useState([])
 
   let { id, index } = useParams()
   //   setStocks(watchlists[index].stocks)
 
-  console.log(watchlists[index].id)
-  const getStocks = async () => {
-    const res = await axios.get(
-      `http://localhost:3001/api/stock/${watchlists[index].id}`
-    )
-    setStocks(res.data)
-    console.log(res.data)
-  }
+  //   console.log(watchlists[index].id)
+  //   const getStocks = async () => {
+  //     const res = await axios.get(
+  //       `http://localhost:3001/api/stock/${watchlists[index].id}`
+  //     )
+  //     setStocks(res.data)
+  //     console.log(res.data)
+  //   }
 
   //   const getStocks = (e) => {
   //     // e.preventDefault()
@@ -27,9 +28,9 @@ const SingleWatchlist = ({ watchlists, deleteStock }) => {
   //     // console.log(stocks)
   //   }
 
-  useEffect(() => {
-    getStocks()
-  }, [])
+  //   useEffect(() => {
+  //     getStocks()
+  //   }, [])
   //   getStocks()
   //////////////////////////
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
@@ -105,6 +106,7 @@ const SingleWatchlist = ({ watchlists, deleteStock }) => {
   return (
     <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
+      {/* <EditWatchlist /> */}
       {stocks.map((stock) => (
         <div>
           <h4>{stock.ticker}</h4>
