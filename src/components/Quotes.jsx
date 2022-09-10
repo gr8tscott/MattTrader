@@ -2,7 +2,7 @@ import react from 'react'
 import { useState, useEffect } from 'react'
 const finnhub = require('finnhub')
 
-const Quotes = ({ ticker }) => {
+const Quotes = ({ ticker, id, deleteStock }) => {
   const [quotes, setQuotes] = useState([])
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
@@ -33,6 +33,14 @@ const Quotes = ({ ticker }) => {
           <th>Low</th>
         </tr> */}
         <tr>
+          <td>
+            <button
+              className="stockdeletebutton"
+              onClick={() => deleteStock(id)}
+            >
+              Remove
+            </button>
+          </td>
           <td>{ticker}</td>
           <td>${quotes.c}</td>
           <td>

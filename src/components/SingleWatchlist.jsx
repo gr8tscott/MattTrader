@@ -97,7 +97,11 @@ const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
           >
             Remove
           </button> */}
-          <Quotes ticker={stock.ticker} id={stock.id} />
+          <Quotes
+            ticker={stock.ticker}
+            id={stock.id}
+            deleteStock={deleteStock}
+          />
           {/* <button
             className="stockdeletebutton"
             onClick={() => deleteStock(stock.id)}
