@@ -77,16 +77,32 @@ const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
     <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
       {/* <EditWatchlist /> */}
+      <table>
+        <tr>
+          <th>Ticker</th>
+          <th>Current Price</th>
+          <th>Today's Change</th>
+          <th>Today's Open</th>
+          <th>Previous Close</th>
+          <th>High</th>
+          <th>Low</th>
+        </tr>
+      </table>
       {stocks.map((stock) => (
         <div>
-          <h4>{stock.ticker}</h4>
-          <Quotes ticker={stock.ticker} />
-          <button
+          {/* <button
             className="stockdeletebutton"
             onClick={() => deleteStock(stock.id)}
           >
             Remove
-          </button>
+          </button> */}
+          <Quotes ticker={stock.ticker} />
+          {/* <button
+            className="stockdeletebutton"
+            onClick={() => deleteStock(stock.id)}
+          >
+            Remove
+          </button> */}
         </div>
       ))}
 

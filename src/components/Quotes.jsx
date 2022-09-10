@@ -24,15 +24,16 @@ const Quotes = ({ ticker }) => {
   return (
     <div className="quotebar">
       <table>
-        <tr>
+        {/* <tr>
           <th>Current Price</th>
           <th>Today's Change</th>
           <th>Today's Open</th>
           <th>Previous Close</th>
           <th>High</th>
           <th>Low</th>
-        </tr>
+        </tr> */}
         <tr>
+          <td>{ticker}</td>
           <td>${quotes.c}</td>
           <td>
             ${quotes.d}/{quotes.dp}%
