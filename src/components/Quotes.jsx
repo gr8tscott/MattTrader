@@ -36,7 +36,7 @@ const Quotes = ({ ticker }) => {
           <td>{ticker}</td>
           <td>${quotes.c}</td>
           <td>
-            ${quotes.d}/{quotes.dp}%
+            ${quotes.d}/ {quotes.dp}%
           </td>
           <td>${quotes.o}</td>
           <td>${quotes.pc}</td>

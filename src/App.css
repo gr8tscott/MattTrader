@@ -54,5 +54,17 @@ table,
     td {
         
         /* Styling the border. */
-        border: 1.5px solid blue;
+        /* border: 1.5px solid blue; */
+        /* width: 100%; */
+        border-left: 1.5px solid blue;
+        border-right: 1.5px solid blue;
+        /* width: 25px; */
     }
+table{
+  /* width: 100%; */
+  border: 1.5px solid blue;
+}
+th, td{
+  width: 100px;
+  font-size: small;
+}
