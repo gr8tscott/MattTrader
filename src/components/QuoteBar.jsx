@@ -1,23 +1,28 @@
-const QuoteBar = ({quotes}) => {
-    return (
-      <div className="quotebar">
-        <h4>Current Price</h4>
-        <h3>${quotes.c}</h3>
-        <h4>Today's Change</h4>
-        <h3>${quotes.d}/{quotes.dp}%</h3>
+const QuoteBar = ({ quotes }) => {
+  return (
+    <div className="quotebar">
+      <table>
+        <tr>
+          <th>Current Price</th>
+          <th>Today's Change</th>
+          <th>Today's Open</th>
+          <th>Previous Close</th>
+          <th>High</th>
+          <th>Low</th>
+        </tr>
+        <tr>
+          <td>${quotes.c}</td>
+          <td>
+            ${quotes.d}/{quotes.dp}%
+          </td>
+          <td>${quotes.o}</td>
+          <td>${quotes.pc}</td>
+          <td>${quotes.h}</td>
+          <td>${quotes.l}</td>
+        </tr>
+      </table>
+    </div>
+  )
+}
 
-        <h4>Today's Open</h4>
-        <h3>${quotes.o}</h3>
-        <h4>Previous Close</h4>
-        <h3>${quotes.pc}</h3>
-
-        <h4>High</h4>
-        <h3>${quotes.h}</h3>
-        <h4>Low</h4>
-        <h3>${quotes.l}</h3>
-      </div>
-    )
-  }
-  
-  export default QuoteBar
-  
+export default QuoteBar

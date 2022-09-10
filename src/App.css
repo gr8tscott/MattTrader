@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+/* table {
+  width: 100%;
+    text-align: left;
+    clear: both;
+
+    display: block;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: grey;
+} */
+table,
+    th,
+    td {
+        
+        /* Styling the border. */
+        border: 1.5px solid blue;
+    }

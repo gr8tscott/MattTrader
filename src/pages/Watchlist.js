@@ -70,7 +70,7 @@ const Watchlist = ({
                 />
               </div>
 
-              <button type="submit">Update Watchlist Name!</button>
+              <button type="submit">Update Watchlist Name</button>
             </form>
           </div>
         </div>

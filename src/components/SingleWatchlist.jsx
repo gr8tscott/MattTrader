@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import EditWatchlist from './EditWatchlist'
+import Quotes from './Quotes'
 const finnhub = require('finnhub')
 
 const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
@@ -10,77 +11,45 @@ const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
   const [quotes, setQuotes] = useState([])
 
   let { id, index } = useParams()
-  //   setStocks(watchlists[index].stocks)
 
-  //   console.log(watchlists[index].id)
-  //   const getStocks = async () => {
-  //     const res = await axios.get(
-  //       `http://localhost:3001/api/stock/${watchlists[index].id}`
-  //     )
-  //     setStocks(res.data)
-  //     console.log(res.data)
-  //   }
-
-  //   const getStocks = (e) => {
-  //     // e.preventDefault()
-  //     let stonks = watchlists[index].stocks
-  //     setStocks(stonks)
-  //     // console.log(stocks)
-  //   }
-
-  //   useEffect(() => {
-  //     getStocks()
-  //   }, [])
-  //   getStocks()
   //////////////////////////
+
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
 
-  let quoteArr = []
   //
+  let tickerArr = []
+  let quoteArr = []
   for (let i = 0; i < stocks.length; i++) {
-    // if (i < stocks.length === false) {
-    //   setQuotes(quoteArr)
-    //   console.log(quotes)
-    //   break
-    // }
-    console.log(stocks[i].ticker)
-    finnhubClient.quote(`${stocks[i].ticker}`, (error, data, response) => {
-      console.log(data)
-      let something = data
-      quotes.push(something)
-      console.log(stocks)
-      console.log(quotes)
-      //   getQuotes()
-    })
+    tickerArr.push(stocks[i].ticker)
+    // console.log(tickerArr)
   }
-  ///////////////////////////
-  //   const getQuotes = (e) => {
-  //     setQuotes(quoteArr)
-  //     console.log(quotes)
-  //   }
-  //   useEffect(() => getQuotes(), [])
+  const delay = async (ms = 2000) => {
+    new Promise((resolve) => setTimeout(resolve, ms))
+  }
 
-  //   stocks.forEach((stock, i, stocks) => {
-  //     // e.preventDefault()
-  //     // stocks.forEach()
-  //     // console.log(stock)
-  //     if (stocks[i] >= stocks.length) {
-  //       setQuotes(quoteArr)
-  //     } else {
-  //       stocks[i] = finnhubClient.quote(
-  //         `${stock.ticker}`,
-  //         (error, data, response) => {
-  //           console.log(data)
-  //           let something = data
-  //           quoteArr.push(something)
-  //         }
-  //       )
-  //     }
-  //   })
+  const mergeQuotes = async () => {
+    for (let i = 0; i < stocks.length; i++) {
+      //   console.log(stocks[i].ticker)
+      await delay(2000)
+      finnhubClient.quote(`${stocks[i].ticker}`, (error, data, response) => {
+        //   console.log(data)
+        let something = data
+        quotes.push(something)
+        //   console.log(stocks)
+        // console.log(quotes)
 
-  console.log(stocks)
+        tickerArr.forEach((element, index) => {
+          quoteArr[element] = quotes[index]
+          //   console.log(quoteArr)
+        })
+        //   getQuotes()
+      })
+    }
+  }
+  mergeQuotes()
+
   //////////////////////////////
   const initialState = {
     watchlistId: watchlists[index].id,
@@ -103,6 +72,7 @@ const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
     setFormState(initialState)
     getStocks()
   }
+
   return (
     <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
@@ -110,6 +80,7 @@ const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
       {stocks.map((stock) => (
         <div>
           <h4>{stock.ticker}</h4>
+          <Quotes ticker={stock.ticker} />
           <button
             className="stockdeletebutton"
             onClick={() => deleteStock(stock.id)}
