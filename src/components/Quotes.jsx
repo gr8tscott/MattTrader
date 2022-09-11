@@ -43,9 +43,11 @@ const Quotes = ({ ticker, id, deleteStock }) => {
           </td>
           <td>{ticker}</td>
           <td>${quotes.c}</td>
-          <td>
-            ${quotes.d}/ {quotes.dp}%
-          </td>
+          <div className={quotes.d > 0 ? 'mark-positive' : 'mark-negative'}>
+            <td>
+              ${quotes.d}/ {quotes.dp}%
+            </td>
+          </div>
           <td>${quotes.o}</td>
           <td>${quotes.pc}</td>
           <td>${quotes.h}</td>

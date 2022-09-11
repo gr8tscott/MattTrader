@@ -52,6 +52,7 @@ function App() {
     )
     // let dataStuff = stockQuote
     console.log(quotes)
+    // setFormState()
     // setSearchResults(dataStuff)
     // let searchGame = true
     // toggleSearched(searchGame)
@@ -62,7 +63,7 @@ function App() {
     let companyNews = finnhubClient.companyNews(
       `${searchQuery}`,
       '2020-01-01',
-      '2022-09-01',
+      '2022-09-11',
       (error, data, response) => {
         if (error) {
           console.error(error)
@@ -144,7 +145,7 @@ function App() {
     console.log(res.data)
   }
   const getStocksByPortfolio = async () => {
-    const res = await axios.get(`http://localhost:3001/api/stock/portfolio/2`)
+    const res = await axios.get(`http://localhost:3001/api/stock/portfolio/1`)
     setPortfolioStocks(res.data)
     console.log(res.data)
   }
@@ -172,7 +173,7 @@ function App() {
 
   return (
     <div className="App">
-      <header>
+      <header className="nav">
         <Nav />
       </header>
       <main>

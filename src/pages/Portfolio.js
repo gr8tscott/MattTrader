@@ -20,12 +20,12 @@ const Portfolio = ({
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
-
-  let cb = 0
+  console.log(quotes.c)
+  console.log(portfolioStocks)
   const initialState = {
-    portfolioId: 2,
+    portfolioId: 1,
     ticker: '',
-    cost_basis: cb
+    cost_basis: quotes.c
   }
   const [formState, setFormState] = useState(initialState)
 
@@ -35,15 +35,16 @@ const Portfolio = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(formState.ticker)
+    console.log(formState.cost_basis)
+    // console.log(formState.cost_basis)
     // let stock ={}
     // stock=formState.ticker
-    finnhubClient.quote(`${formState.ticker}`, (error, data, response) => {
-      console.log(data)
-      let something = data
-      cb = something.c
-      console.log(cb)
-    })
+    // finnhubClient.quote(`${formState.ticker}`, (error, data, response) => {
+    //   console.log(data)
+    //   let something = data
+    //   cb = something.c
+    //   console.log(cb)
+    // })
 
     let res = await axios.post(
       'http://localhost:3001/api/stock/addstock',
@@ -61,14 +62,13 @@ const Portfolio = ({
           onChange={onChange}
           onSubmit={getSearchResults}
           changeCase={changeCase}
+          setFormState={setFormState}
         />
         <QuoteBar quotes={quotes} />
         <div className="create-stock">
           <form className="form" onSubmit={handleSubmit}>
             <div className="stockInput">
-              <label htmlFor="name">
-                Add a {searchQuery} to your Portfolio:
-              </label>
+              <label htmlFor="name">Add {searchQuery} to your Portfolio:</label>
               <input
                 type="text"
                 id="ticker"
@@ -82,7 +82,7 @@ const Portfolio = ({
         </div>
         {portfolios.map((portfolio) => (
           <div>
-            <h3>{portfolio.profit}</h3>
+            <h3>Profit: ${portfolio.profit}</h3>
           </div>
         ))}
         <table>

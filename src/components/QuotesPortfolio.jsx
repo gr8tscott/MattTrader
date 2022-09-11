@@ -8,7 +8,7 @@ const QuotesPortfolio = ({ ticker, id, costBasis, deleteStock }) => {
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
-
+  console.log(ticker)
   const getQuotes = () => {
     finnhubClient.quote(`${ticker}`, (error, data, response) => {
       //   console.log(data)
@@ -42,11 +42,13 @@ const QuotesPortfolio = ({ ticker, id, costBasis, deleteStock }) => {
             </button>
           </td>
           <td>{ticker}</td>
-          <td>{costBasis}</td>
+          <td>${costBasis}</td>
           <td>${quotes.c}</td>
-          <td>
-            ${quotes.d}/ {quotes.dp}%
-          </td>
+          <div className={quotes.d > 0 ? 'mark-positive' : 'mark-negative'}>
+            <td>
+              ${quotes.d}/ {quotes.dp}%
+            </td>
+          </div>
           <td>${quotes.o}</td>
           <td>${quotes.pc}</td>
           <td>${quotes.h}</td>

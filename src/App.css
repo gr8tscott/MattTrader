@@ -68,3 +68,9 @@ th, td{
   width: 100px;
   font-size: small;
 }
+th{
+  border-bottom: 1.5px solid blue;
+  border-top: 1.5px solid blue;
+  background-color: #eaeaea;
+  
+}
