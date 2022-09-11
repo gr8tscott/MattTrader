@@ -93,9 +93,15 @@ th{
 .news-blocks{
   display:flex;
   justify-items: right;
+  padding-left: 3em;
+  padding-right: 3em;
 }
 .news-words{
   text-align: left;
+  padding-left: 1em;
+}
+.homepage{
+  padding-left: 5em;
 }
 
 .nav{
