@@ -74,3 +74,10 @@ th{
   background-color: #eaeaea;
   
 }
+
+.mark-positive{
+  color: #007900;
+}
+.mark-negative{
+  color: #AA0033;
+}
