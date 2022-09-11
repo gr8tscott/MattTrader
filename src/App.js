@@ -20,6 +20,8 @@ function App() {
   const [charts, setCharts] = useState([])
   const [watchlists, setWatchlists] = useState([])
   const [stocklists, setStocklists] = useState([])
+  const [portfolios, setPortfolios] = useState([])
+  const [portfolioStocks, setPortfolioStocks] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [users, setUsers] = useState([])
   const [stocks, setStocks] = useState([])
@@ -140,6 +142,18 @@ function App() {
     setStocklists(res.data)
     console.log(res.data)
   }
+  const getStocksByPortfolio = async () => {
+    const res = await axios.get(`http://localhost:3001/api/stock/portfolio/2`)
+    setPortfolioStocks(res.data)
+    console.log(res.data)
+  }
+
+  /////////PORTFOLIO/////////////
+  const getPortfolioByUser = async () => {
+    const res = await axios.get(`http://localhost:3001/api/portfolio/1`)
+    setPortfolios(res.data)
+    console.log(res.data)
+  }
   //////////USERS/////////////////
   const getUsers = async () => {
     const res = await axios.get(`http://localhost:3001/api/user/user`)
@@ -151,6 +165,8 @@ function App() {
     getWatchlists()
     getStocks()
     getUsers()
+    getPortfolioByUser()
+    getStocksByPortfolio()
   }, [])
 
   return (
@@ -205,7 +221,16 @@ function App() {
               />
             }
           />
-          <Route path="/portfolio" element={<Portfolio />} />
+          <Route
+            path="/portfolio"
+            element={
+              <Portfolio
+                portfolios={portfolios}
+                getStocksByPortfolio={getStocksByPortfolio}
+                portfolioStocks={portfolioStocks}
+              />
+            }
+          />
         </Routes>
       </main>
     </div>
