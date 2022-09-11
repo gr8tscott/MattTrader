@@ -4,9 +4,14 @@ import { useState, useEffect } from 'react'
 import Quotes from '../components/Quotes'
 import Search from '../components/Search'
 
-const Portfolio = (portfolios, portfolioStocks, getStocksByPortfolio) => {
+const Portfolio = ({
+  portfolios,
+  portfolioStocks,
+  getStocksByPortfolio,
+  deleteStock
+}) => {
   console.log(portfolios)
-  //   console.log(portfolioStocks)
+  console.log(portfolioStocks)
 
   const initialState = {
     portfolioId: 2,
@@ -37,7 +42,7 @@ const Portfolio = (portfolios, portfolioStocks, getStocksByPortfolio) => {
         <div className="create-stock">
           <form className="form" onSubmit={handleSubmit}>
             <div className="stockInput">
-              <label htmlFor="name">Add a stock to watchlist:</label>
+              <label htmlFor="name">Add a stock to your Portfolio:</label>
               <input
                 type="text"
                 id="ticker"
@@ -49,11 +54,11 @@ const Portfolio = (portfolios, portfolioStocks, getStocksByPortfolio) => {
             <button type="submit">Add!</button>
           </form>
         </div>
-        {/* {portfolios.map((portfolio) => (
-        <div>
-          <h3>{portfolio.profit}</h3>
-        </div>
-      ))} */}
+        {portfolios.map((portfolio) => (
+          <div>
+            <h3>{portfolio.profit}</h3>
+          </div>
+        ))}
         <table>
           <tr>
             <th></th>
@@ -66,17 +71,15 @@ const Portfolio = (portfolios, portfolioStocks, getStocksByPortfolio) => {
             <th>Low</th>
           </tr>
         </table>
-        {/* {portfolioStocks.map((stock) => (
+        {portfolioStocks.map((stock) => (
           <div>
-            
             <Quotes
               ticker={stock.ticker}
               id={stock.id}
-              // deleteStock={deleteStock}
+              deleteStock={deleteStock}
             />
-           
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   )
