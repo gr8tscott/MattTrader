@@ -136,6 +136,7 @@ function App() {
   const deleteStock = async (id) => {
     let res = await axios.delete(`http://localhost:3001/api/stock/${id}`)
     getStocks()
+    getStocksByPortfolio()
   }
   const getStocksByWatchlist = async (id) => {
     const res = await axios.get(`http://localhost:3001/api/stock/${id}`)
@@ -228,6 +229,12 @@ function App() {
                 portfolios={portfolios}
                 getStocksByPortfolio={getStocksByPortfolio}
                 portfolioStocks={portfolioStocks}
+                deleteStock={deleteStock}
+                quotes={quotes}
+                searchQuery={searchQuery}
+                onChange={handleChange}
+                getSearchResults={getSearchResults}
+                changeCase={changeCase}
               />
             }
           />
