@@ -83,6 +83,31 @@ th{
 }
 
 
+.nav{
+  display: flex;
+  justify-content: flex-start;
+  /* padding-left: 15vw; */
+}
+.navSpace a {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  color:white;
+  font-weight: bold;
+  text-decoration: none;
+}
+header{
+  display: flex;
+  justify-content: space-around;
+  background-color: #3b4c59;
+}
+nav{
+  display:flex;
+  justify-content: space-around;
+  /* left: 20%; */
+  color: white;
+}
+
 .logo{
   background-color: #36a0df;
 }
