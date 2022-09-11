@@ -2,6 +2,8 @@ import React from 'react'
 import Search from '../components/Search'
 import QuoteBar from '../components/QuoteBar'
 import News from '../components/News'
+import BasicFinancials from '../components/BasicFinancials'
+import Chart from '../components/Chart'
 import { useState, useEffect } from 'react'
 const finnhub = require('finnhub')
 
@@ -12,7 +14,9 @@ const Research = ({
   searchQuery,
   news,
   noNews,
-  changeCase
+  changeCase,
+  financials,
+  charts
 }) => {
   //   console.log(news)
   return (
@@ -25,6 +29,8 @@ const Research = ({
       />
       <h3>{searchQuery}</h3>
       <QuoteBar quotes={quotes} />
+      <Chart charts={charts} />
+      <BasicFinancials financials={financials.metric} />
       <News searchQuery={searchQuery} news={news} noNews={noNews} />
     </div>
   )

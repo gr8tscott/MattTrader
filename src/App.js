@@ -7,6 +7,7 @@ import Nav from './components/Nav'
 import Home from './components/Home'
 import Research from './pages/Research'
 import Watchlist from './pages/Watchlist'
+import Portfolio from './pages/Portfolio'
 import SingleWatchlist from './components/SingleWatchlist'
 // import Client from './api'
 const finnhub = require('finnhub')
@@ -15,7 +16,10 @@ const finnhub = require('finnhub')
 function App() {
   const [quotes, setQuotes] = useState([])
   const [news, setNews] = useState([])
+  const [financials, setFinancials] = useState([])
+  const [charts, setCharts] = useState([])
   const [watchlists, setWatchlists] = useState([])
+  const [stocklists, setStocklists] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [users, setUsers] = useState([])
   const [stocks, setStocks] = useState([])
@@ -67,6 +71,30 @@ function App() {
         }
       }
     )
+
+    //////////BASIC FINANCIALS//////////////
+
+    let basicFinancials = finnhubClient.companyBasicFinancials(
+      `${searchQuery}`,
+      'margin',
+      (error, data, response) => {
+        let something = data
+        setFinancials(something)
+      }
+    )
+
+    //////////Chart//////////////
+
+    let chart = finnhubClient.stockCandles(
+      `${searchQuery}`,
+      'D',
+      1590988249,
+      1591852249,
+      (error, data, response) => {
+        let something = data
+        setCharts(something)
+      }
+    )
   }
 
   const handleChange = (event) => {
@@ -107,6 +135,11 @@ function App() {
     let res = await axios.delete(`http://localhost:3001/api/stock/${id}`)
     getStocks()
   }
+  const getStocksByWatchlist = async (id) => {
+    const res = await axios.get(`http://localhost:3001/api/stock/${id}`)
+    setStocklists(res.data)
+    console.log(res.data)
+  }
   //////////USERS/////////////////
   const getUsers = async () => {
     const res = await axios.get(`http://localhost:3001/api/user/user`)
@@ -140,6 +173,8 @@ function App() {
                 news={news}
                 noNews={noNews}
                 changeCase={changeCase}
+                financials={financials}
+                charts={charts}
               />
             }
           />
@@ -166,9 +201,11 @@ function App() {
                 stocks={stocks}
                 deleteStock={deleteStock}
                 getStocks={getStocks}
+                getStocksByWatchlist={getStocksByWatchlist}
               />
             }
           />
+          <Route path="/portfolio" element={<Portfolio />} />
         </Routes>
       </main>
     </div>
