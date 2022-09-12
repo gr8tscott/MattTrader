@@ -108,6 +108,19 @@ const Portfolio = ({
             />
           </div>
         ))}
+        <table>
+          <tr>
+            <th></th>
+            <th>Totals:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
       </div>
     </div>
   )
