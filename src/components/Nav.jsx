@@ -8,9 +8,11 @@ const Nav = () => {
         <h4>
           <em>STONKS</em>
         </h4>
-        <h4>Trader</h4>
+        <h4>
+          <em>Trader</em>
+        </h4>
       </div>
-      <div>
+      <div className="navLinks">
         <Link to="/">Home</Link>
         <Link to="/research">Research</Link>
         <Link to="/watchlists">Watchlists</Link>

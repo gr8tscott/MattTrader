@@ -112,12 +112,11 @@ th{
   /* padding-left: 15vw; */
 }
 .navSpace a {
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
+  padding: 0.5em;
   color:white;
   font-weight: bold;
   text-decoration: none;
+  
 }
 header{
   display: flex;
@@ -127,10 +126,22 @@ header{
 nav{
   display:flex;
   justify-content: space-around;
+  
   /* left: 20%; */
   color: white;
+  
+}
+.navLinks{
+  float:left;
+  margin-top: 5%;
 }
 
 .logo{
   background-color: #36a0df;
+  font-family: 'Tangerine', serif;
+  text-shadow: 2px 2px 2px #aaa;
+  
+  display:inline-block;
+  padding:0px;
+  margin:0px;
 }
