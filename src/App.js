@@ -14,7 +14,7 @@ const finnhub = require('finnhub')
 // import finnhub from 'finnhub'
 
 function App() {
-  const [quotes, setQuotes] = useState([])
+  const [quotes, setQuotes] = useState({})
   const [news, setNews] = useState([])
   const [financials, setFinancials] = useState([])
   const [charts, setCharts] = useState([])
@@ -40,6 +40,42 @@ function App() {
   //   console.log(data)
   // })
 
+  ///////////Portfolio add Stocks Form/////////////
+  // const initialPortfolio = {
+  //   portfolioId: 1,
+  //   ticker: '',
+  //   cost_basis: quotes.c
+  // }
+  const [initialPortfolio, setInitialPortfolio] = useState({
+    portfolioId: 1,
+    ticker: '',
+    cost_basis: 0
+  })
+  // console.log(initialPortfolio)
+
+  const [formPortfolio, setFormPortfolio] = useState(initialPortfolio)
+
+  const portfolioChange = (event) => {
+    setFormPortfolio({
+      ...formPortfolio,
+      [event.target.id]: event.target.value
+    })
+  }
+
+  const portfolioSubmit = async (event) => {
+    event.preventDefault()
+    console.log(formPortfolio.cost_basis)
+
+    let res = await axios.post(
+      'http://localhost:3001/api/stock/addstock',
+      formPortfolio
+    )
+    setFormPortfolio(initialPortfolio)
+    getStocksByPortfolio()
+  }
+
+  ///////////MAIN SEARCH RESULTS FUNCTION////////////
+
   const getSearchResults = async (e) => {
     e.preventDefault()
     let stockQuote = finnhubClient.quote(
@@ -48,11 +84,20 @@ function App() {
         console.log(data)
         let something = data
         setQuotes(something)
+        setInitialPortfolio({
+          ...initialPortfolio,
+          ticker: searchQuery,
+          cost_basis: something.c
+        })
+        setFormPortfolio({
+          ...initialPortfolio,
+          ticker: searchQuery,
+          cost_basis: something.c
+        })
       }
     )
     // let dataStuff = stockQuote
-    console.log(quotes)
-    // setFormState()
+
     // setSearchResults(dataStuff)
     // let searchGame = true
     // toggleSearched(searchGame)
@@ -238,6 +283,9 @@ function App() {
                 onChange={handleChange}
                 getSearchResults={getSearchResults}
                 changeCase={changeCase}
+                portfolioChange={portfolioChange}
+                portfolioSubmit={portfolioSubmit}
+                formPortfolio={formPortfolio}
               />
             }
           />

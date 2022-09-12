@@ -15,44 +15,42 @@ const Portfolio = ({
   onChange,
   quotes,
   searchQuery,
-  changeCase
+  changeCase,
+  portfolioChange,
+  portfolioSubmit,
+  formPortfolio
 }) => {
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
   console.log(quotes.c)
   console.log(portfolioStocks)
-  const initialState = {
-    portfolioId: 1,
-    ticker: '',
-    cost_basis: quotes.c
-  }
-  const [formState, setFormState] = useState(initialState)
 
-  const handleChange = (event) => {
-    setFormState({ ...formState, [event.target.id]: event.target.value })
-  }
+  //   const initialPortfolio = {
+  //     portfolioId: 1,
+  //     ticker: '',
+  //     cost_basis: quotes.c
+  //   }
+  //   const [formPortfolio, setFormPortfolio] = useState(initialPortfolio)
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    console.log(formState.cost_basis)
-    // console.log(formState.cost_basis)
-    // let stock ={}
-    // stock=formState.ticker
-    // finnhubClient.quote(`${formState.ticker}`, (error, data, response) => {
-    //   console.log(data)
-    //   let something = data
-    //   cb = something.c
-    //   console.log(cb)
-    // })
+  //   const portfolioChange = (event) => {
+  //     setFormPortfolio({
+  //       ...formPortfolio,
+  //       [event.target.id]: event.target.value
+  //     })
+  //   }
 
-    let res = await axios.post(
-      'http://localhost:3001/api/stock/addstock',
-      formState
-    )
-    setFormState(initialState)
-    getStocksByPortfolio()
-  }
+  //   const portfolioSubmit = async (event) => {
+  //     event.preventDefault()
+  //     console.log(formPortfolio.cost_basis)
+
+  //     let res = await axios.post(
+  //       'http://localhost:3001/api/stock/addstock',
+  //       formPortfolio
+  //     )
+  //     setFormPortfolio(initialPortfolio)
+  //     getStocksByPortfolio()
+  //   }
   return (
     <div>
       <div className="portfolioPage">
@@ -62,18 +60,18 @@ const Portfolio = ({
           onChange={onChange}
           onSubmit={getSearchResults}
           changeCase={changeCase}
-          setFormState={setFormState}
+          //   setFormState={setFormState}
         />
         <QuoteBar quotes={quotes} />
         <div className="create-stock">
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={portfolioSubmit}>
             <div className="stockInput">
               <label htmlFor="name">Add {searchQuery} to your Portfolio:</label>
               <input
                 type="text"
                 id="ticker"
-                onChange={handleChange}
-                value={formState.ticker}
+                onChange={portfolioChange}
+                value={formPortfolio.ticker}
               />
             </div>
 
