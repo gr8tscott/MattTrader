@@ -159,3 +159,9 @@ nav{
   padding: 10px
 }
 
+.financialBoxes div{
+  border: 1px solid #333333;
+  display: flex;
+  justify-content: flex-start;
+}
+
