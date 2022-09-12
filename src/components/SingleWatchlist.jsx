@@ -6,7 +6,13 @@ import EditWatchlist from './EditWatchlist'
 import Quotes from './Quotes'
 const finnhub = require('finnhub')
 
-const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
+const SingleWatchlist = ({
+  stocks,
+  getStocks,
+  watchlists,
+  deleteStock,
+  getWatchlists
+}) => {
   //   const [stocks, setStocks] = useState([])
   const [quotes, setQuotes] = useState([])
 
@@ -72,11 +78,43 @@ const SingleWatchlist = ({ stocks, getStocks, watchlists, deleteStock }) => {
     setFormState(initialState)
     getStocks()
   }
+  ///////////////////Edit Watchlist Name/////////////////
+  const initial = {
+    name: ''
+  }
+
+  const [form, setForm] = useState(initial)
+
+  const Change = (event) => {
+    setForm({ ...form, [event.target.id]: event.target.value })
+  }
+  console.log(watchlists[index].name)
+  const Submit = async (event) => {
+    event.preventDefault()
+    console.log(form)
+
+    let res = await axios.put(
+      `http://localhost:3001/api/watchlist/${watchlists[index].id}`,
+      form
+    )
+    setForm(initial)
+    getWatchlists()
+  }
 
   return (
     <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
       {/* <EditWatchlist /> */}
+      <div className="create-watchlist">
+        <form className="form" onSubmit={Submit}>
+          <div className="watchlistInputs">
+            <label htmlFor="name">Update Watchlist Name:</label>
+            <input type="text" id="name" onChange={Change} value={form.name} />
+          </div>
+
+          <button type="submit">Update Watchlist Name!</button>
+        </form>
+      </div>
       <table>
         <tr>
           <th></th>

@@ -220,6 +220,8 @@ function App() {
                 deleteStock={deleteStock}
                 getStocks={getStocks}
                 getStocksByWatchlist={getStocksByWatchlist}
+                updateWatchlist={updateWatchlist}
+                getWatchlists={getWatchlists}
               />
             }
           />
