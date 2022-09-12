@@ -20,37 +20,24 @@ const Portfolio = ({
   portfolioSubmit,
   formPortfolio
 }) => {
+  const [currentPriceTotal, setCurrentPriceTotal] = useState(0)
+
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
   console.log(quotes.c)
   console.log(portfolioStocks)
 
-  //   const initialPortfolio = {
-  //     portfolioId: 1,
-  //     ticker: '',
-  //     cost_basis: quotes.c
-  //   }
-  //   const [formPortfolio, setFormPortfolio] = useState(initialPortfolio)
+  let totalCost = 0
 
-  //   const portfolioChange = (event) => {
-  //     setFormPortfolio({
-  //       ...formPortfolio,
-  //       [event.target.id]: event.target.value
-  //     })
-  //   }
+  for (let i = 0; i < portfolioStocks.length; i++) {
+    let cb = parseFloat(portfolioStocks[i].cost_basis)
+    console.log(cb)
+    totalCost = totalCost + cb
+    parseFloat(totalCost)
+    console.log(totalCost)
+  }
 
-  //   const portfolioSubmit = async (event) => {
-  //     event.preventDefault()
-  //     console.log(formPortfolio.cost_basis)
-
-  //     let res = await axios.post(
-  //       'http://localhost:3001/api/stock/addstock',
-  //       formPortfolio
-  //     )
-  //     setFormPortfolio(initialPortfolio)
-  //     getStocksByPortfolio()
-  //   }
   return (
     <div>
       <div className="portfolioPage">
@@ -87,13 +74,11 @@ const Portfolio = ({
           <tr>
             <th></th>
             <th>Ticker</th>
-            <th>Cost Basis</th>
+
             <th>Current Price</th>
             <th>Today's Change</th>
-            <th>Today's Open</th>
-            <th>Previous Close</th>
-            <th>High</th>
-            <th>Low</th>
+            <th>Cost Basis</th>
+            <th>Gain/Loss</th>
           </tr>
         </table>
         {portfolioStocks.map((stock) => (
@@ -103,6 +88,8 @@ const Portfolio = ({
               id={stock.id}
               costBasis={stock.cost_basis}
               deleteStock={deleteStock}
+              currentPriceTotal={currentPriceTotal}
+              setCurrentPriceTotal={setCurrentPriceTotal}
             />
           </div>
         ))}
@@ -112,10 +99,9 @@ const Portfolio = ({
             <th>Totals:</th>
             <th></th>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+
+            <th>${totalCost.toFixed(2)}</th>
+
             <th></th>
           </tr>
         </table>

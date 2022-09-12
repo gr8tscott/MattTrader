@@ -21,6 +21,10 @@ const QuotesPortfolio = ({ ticker, id, costBasis, deleteStock }) => {
     getQuotes()
   }, [])
 
+  let gainLoss = costBasis - quotes.c
+  gainLoss = parseFloat(gainLoss).toFixed(2)
+  console.log(gainLoss)
+
   return (
     <div className="quotebar">
       <table>
@@ -42,17 +46,17 @@ const QuotesPortfolio = ({ ticker, id, costBasis, deleteStock }) => {
             </button>
           </td>
           <td>{ticker}</td>
-          <td>${costBasis}</td>
+
           <td>${quotes.c}</td>
           <div className={quotes.d > 0 ? 'mark-positive' : 'mark-negative'}>
             <td>
               ${quotes.d}/ {quotes.dp}%
             </td>
           </div>
-          <td>${quotes.o}</td>
-          <td>${quotes.pc}</td>
-          <td>${quotes.h}</td>
-          <td>${quotes.l}</td>
+          <td>${costBasis}</td>
+          <div className={gainLoss > 0 ? 'mark-positive' : 'mark-negative'}>
+            <td>${gainLoss}</td>
+          </div>
         </tr>
       </table>
     </div>
