@@ -20,7 +20,7 @@ const Portfolio = ({
   portfolioSubmit,
   formPortfolio
 }) => {
-  const [currentPriceTotal, setCurrentPriceTotal] = useState(0)
+  const [totalGL, setTotalGL] = useState(0)
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
@@ -88,8 +88,8 @@ const Portfolio = ({
               id={stock.id}
               costBasis={stock.cost_basis}
               deleteStock={deleteStock}
-              currentPriceTotal={currentPriceTotal}
-              setCurrentPriceTotal={setCurrentPriceTotal}
+              totalGL={totalGL}
+              setTotalGL={setTotalGL}
             />
           </div>
         ))}
@@ -99,10 +99,10 @@ const Portfolio = ({
             <th>Totals:</th>
             <th></th>
             <th></th>
-
             <th>${totalCost.toFixed(2)}</th>
-
-            <th></th>
+            <div className={totalGL > 0 ? 'mark-positive' : 'mark-negative'}>
+              <th>${totalGL}</th>
+            </div>
           </tr>
         </table>
       </div>

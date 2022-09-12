@@ -2,7 +2,14 @@ import react from 'react'
 import { useState, useEffect } from 'react'
 const finnhub = require('finnhub')
 
-const QuotesPortfolio = ({ ticker, id, costBasis, deleteStock }) => {
+const QuotesPortfolio = ({
+  ticker,
+  id,
+  costBasis,
+  deleteStock,
+  totalGL,
+  setTotalGL
+}) => {
   const [quotes, setQuotes] = useState([])
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
@@ -24,6 +31,10 @@ const QuotesPortfolio = ({ ticker, id, costBasis, deleteStock }) => {
   let gainLoss = costBasis - quotes.c
   gainLoss = parseFloat(gainLoss).toFixed(2)
   console.log(gainLoss)
+  //   let currentGLTotal = parseFloat(totalGL)
+  //   let GLtotal = gainLoss + currentGLTotal
+  //   console.log(GLtotal)
+  //   setTotalGL(GLtotal)
 
   return (
     <div className="quotebar">
