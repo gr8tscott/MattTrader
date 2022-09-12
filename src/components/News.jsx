@@ -37,7 +37,7 @@ const News = ({ news, noNews }) => {
           <div className="news-blocks">
             <img className="fit" src={theNews.image} />
             <div className="news-words">
-              <h3>{theNews.headline}</h3>
+              <h4>{theNews.headline}</h4>
               <div className="summary">
                 <p>{theNews.summary}</p>
               </div>
