@@ -1,23 +1,23 @@
+import React from 'react'
+
 const BasicFinancials = ({ financials }) => {
   console.log(financials)
   //   let basics = financials.metric
   return (
     <div className="homePage">
       <h1>Financials</h1>
-      {/* {basics.map((basic) => (
-        <h3>{basic.freeCashFlowTTM}</h3>
-      ))} */}
-
-      {/* <h2>{noNews}</h2>
-      {news.slice(0, 5).map((theNews) => {
-        return (
-          <div>
-            <img src={theNews.image} />
-            <h3>{theNews.headline}</h3>
-            <p>{theNews.summary}</p>
-          </div>
-        )
-      })} */}
+      <div>
+        <p>52 Week Range:</p>
+        <p>
+          ${financials['52WeekLow']} - ${financials['52WeekHigh']}
+        </p>
+      </div>
+      <div>
+        <p>52 Week Range:{financials['52WeekHigh']}</p>
+        <p>
+          ${financials['52WeekLow']} - ${financials['52WeekHigh']}
+        </p>
+      </div>
     </div>
   )
 }
