@@ -136,12 +136,18 @@ nav{
   margin-top: 5%;
 }
 
-.logo{
+.logo h4{
   background-color: #36a0df;
   font-family: 'Tangerine', serif;
   text-shadow: 2px 2px 2px #aaa;
   
-  display:inline-block;
-  padding:0px;
-  margin:0px;
+  /* display:inline-block; */
+  /* padding:-4px; */
+  /* margin:5px; */
+  
 }
+.logo{
+  background-color: #36a0df;
+  padding: 10px
+}
+
