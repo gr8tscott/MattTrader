@@ -38,7 +38,9 @@ const News = ({ news, noNews }) => {
             <img className="fit" src={theNews.image} />
             <div className="news-words">
               <h3>{theNews.headline}</h3>
-              <p>{theNews.summary}</p>
+              <div className="summary">
+                <p>{theNews.summary}</p>
+              </div>
             </div>
           </div>
         )
