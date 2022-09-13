@@ -77,5 +77,6 @@ const Watchlist = ({
     </div>
   )
 }
+//
 
 export default Watchlist
