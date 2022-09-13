@@ -18,7 +18,6 @@ const Research = ({
   financials,
   charts
 }) => {
-  //   console.log(news)
   return (
     <div className="homePage">
       <h1>Research</h1>

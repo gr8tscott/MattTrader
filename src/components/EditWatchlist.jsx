@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+const BASE_URL = 'https://stonks-trader2.herokuapp.com/'
 
 const EditWatchlist = ({ getUsers, users, watchlists }) => {
   const initialState = {
@@ -20,7 +21,7 @@ const EditWatchlist = ({ getUsers, users, watchlists }) => {
     console.log(formState)
 
     let res = await axios.put(
-      `http://localhost:3001/api/watchlist/${watchlists.id}`,
+      `${BASE_URL}api/watchlist/${watchlists.id}`,
       formState
     )
     setFormState(initialState)

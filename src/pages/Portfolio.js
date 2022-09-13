@@ -39,23 +39,16 @@ const Portfolio = ({
   let total = []
   let totalGainLoss = 0
   const findGainLoss = (gl) => {
-    // setTotalGL(gl + totalGL)
     console.log(gl)
-    // total.push(gl)
-    // console.log(total)
-    // for (let i = 0; i < total.length; i++) {
+
     if (!isNaN(gl)) {
-      //   console.log(totalGainLoss)
       totalGainLoss = parseFloat(totalGainLoss) + parseFloat(gl)
       console.log(totalGainLoss)
       totalGainLoss = parseFloat(totalGainLoss).toFixed(2)
       setTotalGL(totalGainLoss)
     }
-    // }
   }
-  //   useEffect(() => {
-  //     // findGainLoss()
-  //   }, [])
+
   return (
     <div>
       <div className="portfolioPage">
@@ -65,7 +58,6 @@ const Portfolio = ({
           onChange={onChange}
           onSubmit={getSearchResults}
           changeCase={changeCase}
-          //   setFormState={setFormState}
         />
         <QuoteBar quotes={quotes} />
         <div className="create-stock">

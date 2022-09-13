@@ -9,6 +9,9 @@ import Research from './pages/Research'
 import Watchlist from './pages/Watchlist'
 import Portfolio from './pages/Portfolio'
 import SingleWatchlist from './components/SingleWatchlist'
+// import BASE_URL from './services/api'
+import Client from './services/api'
+const BASE_URL = 'https://stonks-trader2.herokuapp.com/'
 // import Client from './api'
 const finnhub = require('finnhub')
 // import finnhub from 'finnhub'
@@ -28,30 +31,19 @@ function App() {
 
   let noNews = ''
 
-  // const [searchResults, setSearchResults] = useState([])
-  // const [searched, toggleSearched] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
 
-  // finnhubClient.quote(`${searchQuery}`, (error, data, response) => {
-  //   console.log(data)
-  // })
-
   ///////////Portfolio add Stocks Form/////////////
-  // const initialPortfolio = {
-  //   portfolioId: 1,
-  //   ticker: '',
-  //   cost_basis: quotes.c
-  // }
+
   const [initialPortfolio, setInitialPortfolio] = useState({
     portfolioId: 1,
     ticker: '',
     cost_basis: 0
   })
-  // console.log(initialPortfolio)
 
   const [formPortfolio, setFormPortfolio] = useState(initialPortfolio)
 
@@ -66,10 +58,7 @@ function App() {
     event.preventDefault()
     console.log(formPortfolio.cost_basis)
 
-    let res = await axios.post(
-      'http://localhost:3001/api/stock/addstock',
-      formPortfolio
-    )
+    let res = await axios.post(`${BASE_URL}api/stock/addstock`, formPortfolio)
     setFormPortfolio(initialPortfolio)
     getStocksByPortfolio()
   }
@@ -96,12 +85,6 @@ function App() {
         })
       }
     )
-    // let dataStuff = stockQuote
-
-    // setSearchResults(dataStuff)
-    // let searchGame = true
-    // toggleSearched(searchGame)
-    // setSearchQuery('')
 
     //////////NEWS//////////////
 
@@ -114,7 +97,6 @@ function App() {
           console.error(error)
           noNews = 'No news available'
         } else {
-          // console.log(data)
           setNews(data)
         }
       }
@@ -158,54 +140,46 @@ function App() {
   /////////WATCHLISTS/////////////
 
   const getWatchlists = async () => {
-    const res = await axios.get(`http://localhost:3001/api/watchlist/watchlist`)
+    const res = await axios.get(`${BASE_URL}api/watchlist/watchlist`)
     setWatchlists(res.data)
-    console.log(res.data)
   }
   const deleteWatchlist = async (id) => {
-    let res = await axios.delete(`http://localhost:3001/api/watchlist/${id}`)
+    let res = await axios.delete(`${BASE_URL}api/watchlist/${id}`)
     getWatchlists()
   }
   const updateWatchlist = async (id) => {
-    let res = await axios.put(
-      `http://localhost:3001/api/watchlist/${watchlists.id}`
-    )
+    let res = await axios.put(`${BASE_URL}api/watchlist/${watchlists.id}`)
     getWatchlists()
   }
 
   /////////STOCKS/////////////
   const getStocks = async () => {
-    const res = await axios.get(`http://localhost:3001/api/stock/stock`)
+    const res = await axios.get(`${BASE_URL}api/stock/stock`)
     setStocks(res.data)
-    console.log(res.data)
   }
   const deleteStock = async (id) => {
-    let res = await axios.delete(`http://localhost:3001/api/stock/${id}`)
+    let res = await axios.delete(`${BASE_URL}api/stock/${id}`)
     getStocks()
     getStocksByPortfolio()
   }
   const getStocksByWatchlist = async (id) => {
-    const res = await axios.get(`http://localhost:3001/api/stock/${id}`)
+    const res = await axios.get(`${BASE_URL}api/stock/${id}`)
     setStocklists(res.data)
-    console.log(res.data)
   }
   const getStocksByPortfolio = async () => {
-    const res = await axios.get(`http://localhost:3001/api/stock/portfolio/1`)
+    const res = await axios.get(`${BASE_URL}api/stock/portfolio/1`)
     setPortfolioStocks(res.data)
-    console.log(res.data)
   }
 
   /////////PORTFOLIO/////////////
   const getPortfolioByUser = async () => {
-    const res = await axios.get(`http://localhost:3001/api/portfolio/1`)
+    const res = await axios.get(`${BASE_URL}api/portfolio/1`)
     setPortfolios(res.data)
-    console.log(res.data)
   }
   //////////USERS/////////////////
   const getUsers = async () => {
-    const res = await axios.get(`http://localhost:3001/api/user/user`)
+    const res = await axios.get(`${BASE_URL}api/user/user`)
     setUsers(res.data)
-    console.log(res.data)
   }
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import CreateWatchlist from '../components/CreateWatchlist'
 import EditWatchlist from '../components/EditWatchlist'
+import BASE_URL from '../services/api'
 
 const Watchlist = ({
   watchlists,
@@ -13,8 +14,6 @@ const Watchlist = ({
   getWatchlists,
   updateWatchlists
 }) => {
-  //   console.log(watchlists)
-  //   console.log(users)
   const initialState = {
     name: watchlists.name
   }
@@ -32,7 +31,7 @@ const Watchlist = ({
     console.log(formState)
 
     let res = await axios.put(
-      `http://localhost:3001/api/watchlist/${watchlists.id}`,
+      `${BASE_URL}api/watchlist/${watchlists.id}`,
       formState
     )
     setFormState(initialState)

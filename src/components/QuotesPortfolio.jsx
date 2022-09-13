@@ -21,54 +21,22 @@ const QuotesPortfolio = ({
 
   const getQuotes = () => {
     finnhubClient.quote(`${ticker}`, (error, data, response) => {
-      //   console.log(data)
       let something = data
       setQuotes(something)
     })
   }
-  //   console.log(ticker)
   let gainLoss = quotes.c - costBasis
   gainLoss = parseFloat(gainLoss).toFixed(2)
-  //   const calculateGainLoss = () => {
-  //   if (isNaN(gainLoss) === false) {
-  //     let arr = currentGL
-  //     arr.push(gainLoss)
-  //     setCurrentGL(arr)
-  //   }
+
   findGainLoss(gainLoss)
-  //   }
-  //   const pleaseDearGod = () => {
-  //     setTimeout(() => findGainLoss(gainLoss), 500)
-  //   }
 
   useEffect(() => {
     getQuotes()
-    // pleaseDearGod()
-    // findGainLoss(gainLoss)
-    // calculateGainLoss()
   }, [])
-  //   pleaseDearGod()
-  //   let total = []
-
-  //   console.log(gainLoss)
-  //   total.push(gainLoss)
-  //   console.log(total)
-  //   let currentGLTotal = parseFloat(totalGL)
-  //   let GLtotal = gainLoss + currentGLTotal
-  //   console.log(GLtotal)
-  //   setTotalGL(GLtotal)
 
   return (
     <div className="quotebar">
       <table>
-        {/* <tr>
-          <th>Current Price</th>
-          <th>Today's Change</th>
-          <th>Today's Open</th>
-          <th>Previous Close</th>
-          <th>High</th>
-          <th>Low</th>
-        </tr> */}
         <tr>
           <td>
             <button

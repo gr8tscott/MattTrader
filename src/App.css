@@ -163,5 +163,17 @@ nav{
   border: 1px solid #333333;
   display: flex;
   justify-content: flex-start;
+  justify-items: right;
+  padding-left: 3em;
+  padding-right: 3em;
+  margin:3em;
+}
+
+.thehomePage img{
+  /* background-image: url(https://i.imgur.com/KSIzowt.jpg); */
+  background-size: cover; 
+    height:auto;
+    width: auto;
+   background-attachment:fixed;
 }
 

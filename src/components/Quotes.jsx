@@ -11,12 +11,10 @@ const Quotes = ({ ticker, id, deleteStock }) => {
 
   const getQuotes = () => {
     finnhubClient.quote(`${ticker}`, (error, data, response) => {
-      console.log(data)
       let something = data
       setQuotes(something)
     })
   }
-  console.log(ticker)
   useEffect(() => {
     getQuotes()
   }, [])
@@ -24,14 +22,6 @@ const Quotes = ({ ticker, id, deleteStock }) => {
   return (
     <div className="quotebar">
       <table>
-        {/* <tr>
-          <th>Current Price</th>
-          <th>Today's Change</th>
-          <th>Today's Open</th>
-          <th>Previous Close</th>
-          <th>High</th>
-          <th>Low</th>
-        </tr> */}
         <tr>
           <td>
             <button

@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import EditWatchlist from './EditWatchlist'
 import Quotes from './Quotes'
+const BASE_URL = 'https://stonks-trader2.herokuapp.com/'
+
 const finnhub = require('finnhub')
 
 const SingleWatchlist = ({
@@ -13,7 +15,6 @@ const SingleWatchlist = ({
   deleteStock,
   getWatchlists
 }) => {
-  //   const [stocks, setStocks] = useState([])
   const [quotes, setQuotes] = useState([])
 
   let { id, index } = useParams()
@@ -29,7 +30,6 @@ const SingleWatchlist = ({
   let quoteArr = []
   for (let i = 0; i < stocks.length; i++) {
     tickerArr.push(stocks[i].ticker)
-    // console.log(tickerArr)
   }
   const delay = async (ms = 2000) => {
     new Promise((resolve) => setTimeout(resolve, ms))
@@ -37,20 +37,14 @@ const SingleWatchlist = ({
 
   const mergeQuotes = async () => {
     for (let i = 0; i < stocks.length; i++) {
-      //   console.log(stocks[i].ticker)
       await delay(2000)
       finnhubClient.quote(`${stocks[i].ticker}`, (error, data, response) => {
-        //   console.log(data)
         let something = data
         quotes.push(something)
-        //   console.log(stocks)
-        // console.log(quotes)
 
         tickerArr.forEach((element, index) => {
           quoteArr[element] = quotes[index]
-          //   console.log(quoteArr)
         })
-        //   getQuotes()
       })
     }
   }
@@ -71,10 +65,7 @@ const SingleWatchlist = ({
     event.preventDefault()
     console.log(formState)
 
-    let res = await axios.post(
-      'http://localhost:3001/api/stock/addstock',
-      formState
-    )
+    let res = await axios.post(`${BASE_URL}api/stock/addstock`, formState)
     setFormState(initialState)
     getStocks()
   }
@@ -94,7 +85,7 @@ const SingleWatchlist = ({
     console.log(form)
 
     let res = await axios.put(
-      `http://localhost:3001/api/watchlist/${watchlists[index].id}`,
+      `${BASE_URL}api/watchlist/${watchlists[index].id}`,
       form
     )
     setForm(initial)
@@ -104,7 +95,6 @@ const SingleWatchlist = ({
   return (
     <div className="singleWatchlist">
       <h1>{watchlists[index].name}</h1>
-      {/* <EditWatchlist /> */}
       <div className="create-watchlist">
         <form className="form" onSubmit={Submit}>
           <div className="watchlistInputs">
@@ -129,29 +119,14 @@ const SingleWatchlist = ({
       </table>
       {stocks.map((stock) => (
         <div>
-          {/* <button
-            className="stockdeletebutton"
-            onClick={() => deleteStock(stock.id)}
-          >
-            Remove
-          </button> */}
           <Quotes
             ticker={stock.ticker}
             id={stock.id}
             deleteStock={deleteStock}
           />
-          {/* <button
-            className="stockdeletebutton"
-            onClick={() => deleteStock(stock.id)}
-          >
-            Remove
-          </button> */}
         </div>
       ))}
 
-      {/* {quotes.map((quote) => (
-        <h2>{quote.c}</h2>
-      ))} */}
       <div className="create-stock">
         <form className="form" onSubmit={handleSubmit}>
           <div className="stockInput">

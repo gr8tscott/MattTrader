@@ -2,7 +2,6 @@ import React from 'react'
 
 const BasicFinancials = ({ financials }) => {
   console.log(financials)
-  //   let basics = financials.metric
   if (financials) {
     return (
       <div className="homePage">
@@ -27,13 +26,6 @@ const BasicFinancials = ({ financials }) => {
             <p>{financials['3MonthAverageTradingVolume']} million</p>
           </div>
         </div>
-        {/* <div>
-          <h3>Dividends</h3>
-          <div>
-            <p>90-Day Avg. Volume:</p>
-            <p>{financials['3MonthAverageTradingVolume']} million</p>
-          </div>
-        </div> */}
       </div>
     )
   }

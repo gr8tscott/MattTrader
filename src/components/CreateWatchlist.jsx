@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+const BASE_URL = 'https://stonks-trader2.herokuapp.com/'
 
 const CreateWatchlist = ({ getUsers, users, getWatchlists }) => {
   const initialState = {
@@ -17,7 +18,7 @@ const CreateWatchlist = ({ getUsers, users, getWatchlists }) => {
     console.log(formState)
 
     let res = await axios.post(
-      'http://localhost:3001/api/watchlist/addwatchlist',
+      `${BASE_URL}api/watchlist/addwatchlist`,
       formState
     )
     setFormState(initialState)
@@ -45,25 +46,8 @@ const CreateWatchlist = ({ getUsers, users, getWatchlists }) => {
             onChange={handleChange}
             value={formState.name}
           />
-
-          {/* <label htmlFor="stock">Insert Ticker Symbol:</label>
-          <input
-            type="text"
-            id="ticker"
-            onChange={handleChange}
-            value={formState.stocks}
-          /> */}
         </div>
-        {/* <div className="reviewText">
-          <label htmlFor="text">Leave your review here:</label>
-          <textarea
-            id="text"
-            cols="30"
-            rows="10"
-            onChange={handleChange}
-            value={formState.text}
-          ></textarea>
-        </div> */}
+
         <button type="submit">Create Watchlist!</button>
       </form>
     </div>

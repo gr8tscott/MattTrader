@@ -20,40 +20,10 @@ const Quotes = ({ ticker }) => {
   useEffect(() => {
     getQuotes()
   }, [])
-
-  // let quoteMap
-  // if (quotes) {
-  //   ;<table>
-  //     <tr>
-  //       <th>Ticker</th>
-  //       <th>Current Price</th>
-  //       <th>Today's Change</th>
-  //       <th>Today's Open</th>
-  //       <th>Previous Close</th>
-  //       <th>High</th>
-  //       <th>Low</th>
-  //     </tr>
-  //     {
-  //       (quoteMap = quotes.map((quote) => (
-  //         <tr>
-  //           <td>{ticker}</td>
-  //           <td>${quote.c}</td>
-  //           <td>
-  //             ${quote.d}/{quotes.dp}%
-  //           </td>
-  //           <td>${quote.o}</td>
-  //           <td>${quote.pc}</td>
-  //           <td>${quote.h}</td>
-  //           <td>${quote.l}</td>
-  //         </tr>
-  //       )))
-  //     }
-  //   </table>
-  // }
   return (
     <div className="quotebar">
       <h2>{quotes.c}</h2>
-      {/* <table>
+      <table>
         <tr>
           <th>Current Price</th>
           <th>Today's Change</th>
@@ -72,7 +42,7 @@ const Quotes = ({ ticker }) => {
           <td>${quotes.h}</td>
           <td>${quotes.l}</td>
         </tr>
-      </table> */}
+      </table>
     </div>
   )
 }
