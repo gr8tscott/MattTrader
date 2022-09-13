@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import QuotesPortfolio from '../components/QuotesPortfolio'
 import Search from '../components/Search'
 import QuoteBar from '../components/QuoteBar'
+import { getByLabelText } from '@testing-library/react'
 const finnhub = require('finnhub')
 
 const Portfolio = ({
@@ -20,24 +21,41 @@ const Portfolio = ({
   portfolioSubmit,
   formPortfolio
 }) => {
-  const [totalGL, setTotalGL] = useState(0)
+  const [totalGL, setTotalGL] = useState(0.0)
+  const [currentGL, setCurrentGL] = useState([])
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
   api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
   const finnhubClient = new finnhub.DefaultApi()
-  console.log(quotes.c)
-  console.log(portfolioStocks)
 
   let totalCost = 0
 
   for (let i = 0; i < portfolioStocks.length; i++) {
     let cb = parseFloat(portfolioStocks[i].cost_basis)
-    console.log(cb)
+
     totalCost = totalCost + cb
     parseFloat(totalCost)
-    console.log(totalCost)
   }
-
+  let total = []
+  let totalGainLoss = 0
+  const findGainLoss = (gl) => {
+    // setTotalGL(gl + totalGL)
+    console.log(gl)
+    // total.push(gl)
+    // console.log(total)
+    // for (let i = 0; i < total.length; i++) {
+    if (!isNaN(gl)) {
+      //   console.log(totalGainLoss)
+      totalGainLoss = parseFloat(totalGainLoss) + parseFloat(gl)
+      console.log(totalGainLoss)
+      totalGainLoss = parseFloat(totalGainLoss).toFixed(2)
+      setTotalGL(totalGainLoss)
+    }
+    // }
+  }
+  //   useEffect(() => {
+  //     // findGainLoss()
+  //   }, [])
   return (
     <div>
       <div className="portfolioPage">
@@ -90,6 +108,10 @@ const Portfolio = ({
               deleteStock={deleteStock}
               totalGL={totalGL}
               setTotalGL={setTotalGL}
+              total={total}
+              findGainLoss={findGainLoss}
+              setCurrentGL={setCurrentGL}
+              currentGL={currentGL}
             />
           </div>
         ))}

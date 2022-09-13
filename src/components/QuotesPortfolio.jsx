@@ -7,8 +7,11 @@ const QuotesPortfolio = ({
   id,
   costBasis,
   deleteStock,
-  totalGL,
-  setTotalGL
+  total,
+  setTotalGL,
+  findGainLoss,
+  setCurrentGL,
+  currentGL
 }) => {
   const [quotes, setQuotes] = useState([])
 
@@ -24,13 +27,32 @@ const QuotesPortfolio = ({
     })
   }
   //   console.log(ticker)
+  let gainLoss = quotes.c - costBasis
+  gainLoss = parseFloat(gainLoss).toFixed(2)
+  //   const calculateGainLoss = () => {
+  //   if (isNaN(gainLoss) === false) {
+  //     let arr = currentGL
+  //     arr.push(gainLoss)
+  //     setCurrentGL(arr)
+  //   }
+  findGainLoss(gainLoss)
+  //   }
+  //   const pleaseDearGod = () => {
+  //     setTimeout(() => findGainLoss(gainLoss), 500)
+  //   }
+
   useEffect(() => {
     getQuotes()
+    // pleaseDearGod()
+    // findGainLoss(gainLoss)
+    // calculateGainLoss()
   }, [])
+  //   pleaseDearGod()
+  //   let total = []
 
-  let gainLoss = costBasis - quotes.c
-  gainLoss = parseFloat(gainLoss).toFixed(2)
-  console.log(gainLoss)
+  //   console.log(gainLoss)
+  //   total.push(gainLoss)
+  //   console.log(total)
   //   let currentGLTotal = parseFloat(totalGL)
   //   let GLtotal = gainLoss + currentGLTotal
   //   console.log(GLtotal)

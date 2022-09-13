@@ -1,4 +1,5 @@
 const QuoteBar = ({ quotes }) => {
+  console.log('bar check')
   return (
     <div className="quotebar">
       <table>
