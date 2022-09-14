@@ -76,7 +76,9 @@ const Portfolio = ({
           </form>
         </div>
         {portfolios.map((portfolio) => (
-          <div>
+          <div
+            className={portfolio.profit > 0 ? 'mark-positive' : 'mark-negative'}
+          >
             <h3>Profit: ${portfolio.profit}</h3>
           </div>
         ))}
