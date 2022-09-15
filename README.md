@@ -23,7 +23,7 @@ A stock research application
 
 ### **_Technologies Used_**
 
-##### Finnhub API HTML, CSS, JavaScript, React.js, Postgress, Express, Node.js, and Heroku
+##### Finnhub API, HTML, CSS, JavaScript, React.js, Postgress, Express, Node.js, and Heroku
 
 ---
 
