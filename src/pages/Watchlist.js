@@ -15,6 +15,7 @@ const Watchlist = ({
   updateWatchlists
 }) => {
   const initialState = {
+    id: 1,
     name: watchlists.name
   }
 
@@ -29,7 +30,7 @@ const Watchlist = ({
   const handleSubmit = async (event) => {
     event.preventDefault()
     console.log(formState)
-
+    console.log(watchlists.id)
     let res = await axios.put(
       `${BASE_URL}api/watchlist/${watchlists.id}`,
       formState
@@ -57,7 +58,7 @@ const Watchlist = ({
           >
             Delete List
           </button>
-          <div className="edit-watchlist">
+          {/* <div className="edit-watchlist">
             <form className="form" onSubmit={handleSubmit}>
               <div className="watchlistInputs">
                 <label htmlFor="name">Update Watchlist Name:</label>
@@ -71,7 +72,13 @@ const Watchlist = ({
 
               <button type="submit">Update Watchlist Name</button>
             </form>
-          </div>
+          </div> */}
+          <Link
+            className="edit"
+            to={`/editwatchlists/${watchlist.id}/${index}`}
+          >
+            Edit Name
+          </Link>
         </div>
       ))}
     </div>

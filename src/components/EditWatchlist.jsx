@@ -1,15 +1,19 @@
+import React from 'react'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-const BASE_URL = 'https://stonks-trader2.herokuapp.com/'
+import { useNavigate } from 'react-router-dom'
 
-const EditWatchlist = ({ getUsers, users, watchlists }) => {
-  const initialState = {
-    name: watchlists.name
-  }
+const EditWatchlist = (props) => {
+  // const [review, setReview] = useState([])
 
   let { id, index } = useParams()
 
+  let navigate = useNavigate()
+
+  const initialState = {
+    name: props.watchlist[index].name
+  }
   const [formState, setFormState] = useState(initialState)
 
   const handleChange = (event) => {
@@ -18,28 +22,25 @@ const EditWatchlist = ({ getUsers, users, watchlists }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(formState)
 
-    let res = await axios.put(
-      `${BASE_URL}api/watchlist/${watchlists.id}`,
-      formState
-    )
+    let res = await axios.put(`/watchlist/${id}`, formState)
     setFormState(initialState)
+    navigate(`/watchlists`)
   }
-  return (
-    <div className="create-watchlist">
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="watchlistInputs">
-          <label htmlFor="name">Update Watchlist Name:</label>
-          <input
-            type="text"
-            id="name"
-            onChange={handleChange}
-            value={formState.name}
-          />
-        </div>
 
-        <button type="submit">Update Watchlist Name!</button>
+  return (
+    <div className="watchlistCard">
+      <h1>Edit your watchlist here {props.watchlist[index].name}</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Watchlist Name:</label>
+        <input
+          type="text"
+          id="name"
+          onChange={handleChange}
+          value={formState.name}
+        />
+
+        <button type="submit">Update Review!</button>
       </form>
     </div>
   )

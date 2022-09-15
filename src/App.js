@@ -8,6 +8,7 @@ import Home from './components/Home'
 import Research from './pages/Research'
 import Watchlist from './pages/Watchlist'
 import Portfolio from './pages/Portfolio'
+import EditWatchlist from './components/EditWatchlist'
 import SingleWatchlist from './components/SingleWatchlist'
 // import BASE_URL from './services/api'
 import Client from './services/api'
@@ -260,6 +261,15 @@ function App() {
                 portfolioChange={portfolioChange}
                 portfolioSubmit={portfolioSubmit}
                 formPortfolio={formPortfolio}
+              />
+            }
+          />
+          <Route
+            path="/editwatchlists/:id/:index"
+            element={
+              <EditWatchlist
+                watchlists={watchlists}
+                setWatchlists={setWatchlists}
               />
             }
           />
