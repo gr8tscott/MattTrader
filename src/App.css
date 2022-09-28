@@ -159,15 +159,36 @@ nav{
   padding: 10px
 }
 
-.financialBoxes div{
+.finboxLeft div{
   border: 1px solid #333333;
   display: flex;
   justify-content: flex-start;
   justify-items: right;
   padding-left: 3em;
   padding-right: 3em;
-  margin:3em;
+  
 }
+.finboxRight div{
+  border: 1px solid #333333;
+  display: flex;
+  justify-content: flex-start;
+  justify-items: right;
+  padding-left: 3em;
+  padding-right: 3em;
+  
+}
+.financialBoxes div{
+  /* border: 1px solid #333333; */
+  margin-left:3em;
+  margin-right: 3em;
+}
+.financialBoxes{
+  display: flex;
+  margin-left:6em;
+  margin-right: 6em;
+
+}
+
 
 .thehomePage img{
   /* background-image: url(https://i.imgur.com/KSIzowt.jpg); */

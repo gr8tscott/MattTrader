@@ -4,6 +4,7 @@ const Chart = ({ charts }) => {
   return (
     <div className="chart">
       <h1>Chart</h1>
+      <img src="https://i.imgur.com/hhmiis5.png" />
       {/* {basics.map((basic) => (
           <h3>{basic.freeCashFlowTTM}</h3>
         ))} */}

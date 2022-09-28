@@ -33,23 +33,22 @@ const Portfolio = ({
 
   for (let i = 0; i < portfolioStocks.length; i++) {
     let cb = parseFloat(portfolioStocks[i].cost_basis)
-
+    console.log(portfolios.profit)
     totalCost = totalCost + cb
     parseFloat(totalCost)
   }
   let total = []
   let totalGainLoss = 0
   const findGainLoss = (gl) => {
-    console.log(gl)
-
     if (!isNaN(gl)) {
       totalGainLoss = parseFloat(totalGainLoss) + parseFloat(gl)
-      console.log(totalGainLoss)
+
       totalGainLoss = parseFloat(totalGainLoss).toFixed(2)
       setTotalGL(totalGainLoss)
     }
   }
 
+  //
   return (
     <div>
       <div className="portfolioPage">
@@ -77,7 +76,9 @@ const Portfolio = ({
           </form>
         </div>
         {portfolios.map((portfolio) => (
-          <div>
+          <div
+            className={portfolio.profit > 0 ? 'mark-positive' : 'mark-negative'}
+          >
             <h3>Profit: ${portfolio.profit}</h3>
           </div>
         ))}
