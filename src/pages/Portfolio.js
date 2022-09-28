@@ -25,7 +25,8 @@ const Portfolio = ({
   const [currentGL, setCurrentGL] = useState([])
 
   const api_key = finnhub.ApiClient.instance.authentications['api_key']
-  api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
+  // api_key.apiKey = process.env.REACT_APP_FINNHUB_API_KEY
+  api_key.apiKey = 'cc8atrqad3iciiq4952g'
   const finnhubClient = new finnhub.DefaultApi()
 
   let totalCost = 0
