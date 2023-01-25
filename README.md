@@ -17,7 +17,7 @@ A stock research application
 #### Matt Trader is a stock research app with the ability to track stock market activity, view earnings, read news articles, create/edit watchlists for your favorite stocks, and make paper trades to track your progress.
 
 
-##### You can check out the project [here](https://weebmanga.herokuapp.com/) on heroku.
+##### You can check out the project [here](https://stonkstrader3.web.app/) on Firebase.
 
 ---
 
